@@ -1,0 +1,11 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:testcase-chf-invoice",
+  "@type": ["sap:TestCase", "sap:DomainInstance"],
+  "sap:name": "Invoice creation with CHF currency",
+  "sap:testType": "integration",
+  "sap:automated": true,
+  "sap:lastExecutionResult": "passed",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

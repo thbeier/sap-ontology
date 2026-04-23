@@ -1,0 +1,12 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:change-chf-rollout",
+  "@type": ["sap:Change", "sap:DomainInstance"],
+  "sap:name": "Enable CHF for Swiss Sales Org",
+  "sap:status": "in-progress",
+  "sap:priority": "high",
+  "sap:requestedBy": "finance-ops@example.com",
+  "sap:approvedBy": "cfo@example.com",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

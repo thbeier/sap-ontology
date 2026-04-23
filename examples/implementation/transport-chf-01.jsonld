@@ -1,0 +1,12 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:transport-chf-01",
+  "@type": ["sap:Transport", "sap:DomainInstance"],
+  "sap:transportId": "DEVK900123",
+  "sap:type": "customizing",
+  "sap:sourceSystemRef": "DEV",
+  "sap:targetSystem": "QAS",
+  "sap:releaseStatus": "released",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

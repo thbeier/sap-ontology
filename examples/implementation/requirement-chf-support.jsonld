@@ -1,0 +1,11 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:requirement-chf-support",
+  "@type": ["sap:Requirement", "sap:DomainInstance"],
+  "sap:name": "Support CHF currency in Swiss sales org",
+  "sap:priority": "high",
+  "sap:source": "Finance business case 2026-Q1",
+  "sap:acceptanceCriteria": "Sales Order, Delivery, Invoice all post in CHF without manual intervention.",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

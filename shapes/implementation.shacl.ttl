@@ -1,0 +1,51 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix sap:  <https://sap-ontology.deloitte.com/vocab#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+sap:ConfigurationShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Configuration ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:type ; sh:datatype xsd:string ;
+        sh:in ( "customizing" "custom-code" "parameter" ) ; sh:minCount 1 ] .
+
+sap:ChangeShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Change ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ;   sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:status ; sh:datatype xsd:string ;
+        sh:in ( "draft" "requested" "approved" "in-progress" "deployed" "rejected" "rolled-back" ) ; sh:minCount 1 ] .
+
+sap:TransportShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Transport ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:transportId ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:type ;        sh:datatype xsd:string ;
+        sh:in ( "customizing" "workbench" ) ] .
+
+sap:TestCaseShape
+    a sh:NodeShape ;
+    sh:targetClass sap:TestCase ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ;     sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:testType ; sh:datatype xsd:string ;
+        sh:in ( "unit" "integration" "regression" "UAT" ) ] .
+
+sap:IncidentShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Incident ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:ticketId ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:title ;    sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:severity ; sh:datatype xsd:string ;
+        sh:in ( "critical" "high" "medium" "low" ) ] .
+
+sap:RequirementShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Requirement ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ;     sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:priority ; sh:datatype xsd:string ] .

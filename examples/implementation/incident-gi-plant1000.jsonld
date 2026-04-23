@@ -1,0 +1,12 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:incident-gi-plant1000",
+  "@type": ["sap:Incident", "sap:DomainInstance"],
+  "sap:ticketId": "INC0012345",
+  "sap:title": "Goods issue posting fails for plant 1000",
+  "sap:severity": "high",
+  "sap:status": "open",
+  "sap:reportedAt": "2026-04-22T09:15:00Z",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

@@ -1,0 +1,11 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:config-pricing-procedure-zstd",
+  "@type": ["sap:Configuration", "sap:DomainInstance"],
+  "sap:name": "Pricing Procedure ZSTD",
+  "sap:type": "customizing",
+  "sap:scope": "client-wide",
+  "sap:mutability": "stable",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}
