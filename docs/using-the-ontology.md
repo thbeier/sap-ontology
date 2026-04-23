@@ -12,7 +12,7 @@
    }
    ```
 3. Instances carry the client's URI scheme:
-   `https://sap-ontology.deloitte.com/client/{clientId}/{domain}/{class}/{instance-id}`
+   `https://thbeier.github.io/sap-ontology/client/{clientId}/{domain}/{class}/{instance-id}`
 4. Lower-model classes stay in the client's private instance; they do **not** flow back unless generalized via the contribution process.
 
 ## Populating a scenario

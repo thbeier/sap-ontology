@@ -5,7 +5,7 @@ from rdflib import Graph, URIRef
 
 OWL_OBJECT_PROP = URIRef("http://www.w3.org/2002/07/owl#ObjectProperty")
 RDF_TYPE = URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
-VOCAB = "https://sap-ontology.deloitte.com/vocab#"
+VOCAB = "https://thbeier.github.io/sap-ontology/vocab#"
 
 INTRA = [
     # Architecture

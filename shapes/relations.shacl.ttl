@@ -1,5 +1,5 @@
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
-@prefix sap:  <https://sap-ontology.deloitte.com/vocab#> .
+@prefix sap:  <https://thbeier.github.io/sap-ontology/vocab#> .
 
 # The inter-domain relations whose targets are a single class:
 # `sh:class` is enforced as a property shape on the owning class's node shape

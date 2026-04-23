@@ -3,7 +3,7 @@ from pathlib import Path
 from rdflib import Graph, URIRef
 import pytest
 
-VOCAB = "https://sap-ontology.deloitte.com/vocab#"
+VOCAB = "https://thbeier.github.io/sap-ontology/vocab#"
 OWL_CLASS = URIRef("http://www.w3.org/2002/07/owl#Class")
 RDF_TYPE = URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
 

@@ -1,5 +1,5 @@
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
-@prefix sap:  <https://sap-ontology.deloitte.com/vocab#> .
+@prefix sap:  <https://thbeier.github.io/sap-ontology/vocab#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 
 sap:OrgUnitShape

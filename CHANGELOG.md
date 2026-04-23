@@ -2,6 +2,14 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.1.1] — 2026-04-23
+
+### Changed
+- **Namespace URI** — `sap:` now binds to `https://thbeier.github.io/sap-ontology/vocab#` (was `https://sap-ontology.deloitte.com/vocab#`). Rationale: the prior URI promised hosting on a Deloitte-owned domain that is not provisioned; the new URI maps to a GitHub Pages location that will be published when the repo is pushed to `github.com/thbeier/sap-ontology`. No class / relation / shape semantics changed — the prefix binding moved.
+
+### Note for adopters
+- Any instance data authored against v0.1.0 that expanded `sap:` to the old URI must be migrated. The expansion is mechanical: string-replace `https://sap-ontology.deloitte.com/` with `https://thbeier.github.io/sap-ontology/` across JSON-LD, Turtle, and SPARQL artifacts. The short-form `sap:` references resolve automatically once a v0.1.1 `@context` is loaded.
+
 ## [0.1.0] — 2026-04-23
 
 ### Added

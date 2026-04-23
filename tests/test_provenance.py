@@ -18,7 +18,7 @@ def provenance_graph(schema_dir, shapes_dir, examples_dir):
 
 def test_provenance_class_defined(provenance_graph):
     from rdflib import URIRef
-    ns = "https://sap-ontology.deloitte.com/vocab#"
+    ns = "https://thbeier.github.io/sap-ontology/vocab#"
     prov_class = URIRef(ns + "Provenance")
     owl_class = URIRef("http://www.w3.org/2002/07/owl#Class")
     assert (prov_class, URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),

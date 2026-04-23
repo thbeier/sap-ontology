@@ -42,7 +42,7 @@ def test_user_class_declared_but_unused(schema_dir, examples_dir):
     """User is in the upper model but intentionally has no canonical example."""
     g = Graph()
     g.parse(schema_dir / "organization.jsonld", format="json-ld")
-    ns = "https://sap-ontology.deloitte.com/vocab#"
+    ns = "https://thbeier.github.io/sap-ontology/vocab#"
     user = URIRef(ns + "User")
     owl_class = URIRef("http://www.w3.org/2002/07/owl#Class")
     rdf_type = URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
