@@ -1,0 +1,33 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix sap:  <https://sap-ontology.deloitte.com/vocab#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+sap:ProvenanceShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Provenance ;
+    sh:property [
+        sh:path sap:sourceSystem ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sap:assertedAt ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sap:trustLevel ;
+        sh:datatype xsd:string ;
+        sh:in ( "authoritative" "verified" "asserted" "inferred" "draft" ) ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sap:method ;
+        sh:datatype xsd:string ;
+        sh:in ( "manual" "ETL" "LLM-extracted" ) ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] .

@@ -1,0 +1,11 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:prov-signavio-etl-001",
+  "@type": "sap:Provenance",
+  "sap:sourceSystem": "signavio",
+  "sap:sourceUri": "https://example.signavio.com/p/123",
+  "sap:assertedBy": "federation-pipeline-v0.1",
+  "sap:assertedAt": { "@value": "2026-04-23T08:00:00Z", "@type": "xsd:dateTime" },
+  "sap:trustLevel": "asserted",
+  "sap:method": "ETL"
+}

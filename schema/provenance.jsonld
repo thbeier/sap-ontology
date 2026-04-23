@@ -1,0 +1,32 @@
+{
+  "@context": "../context/sap-ontology-context.jsonld",
+  "@graph": [
+    {
+      "@id": "sap:Provenance",
+      "@type": "owl:Class",
+      "rdfs:label": "Provenance",
+      "rdfs:comment": "Metadata attached to every asserted instance describing where the claim came from, who asserted it, when, and how much to trust it."
+    },
+    { "@id": "sap:sourceSystem", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Provenance" },
+      "rdfs:range":  { "@id": "xsd:string" },
+      "rdfs:comment": "Name of the system of record (e.g., 'signavio', 'leanix', 'cloud-alm', 'sap-direct', 'manual')." },
+    { "@id": "sap:sourceUri", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Provenance" },
+      "rdfs:range":  { "@id": "xsd:anyURI" } },
+    { "@id": "sap:assertedBy", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Provenance" },
+      "rdfs:range":  { "@id": "xsd:string" } },
+    { "@id": "sap:assertedAt", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Provenance" },
+      "rdfs:range":  { "@id": "xsd:dateTime" } },
+    { "@id": "sap:trustLevel", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Provenance" },
+      "rdfs:range":  { "@id": "xsd:string" },
+      "rdfs:comment": "One of: authoritative, verified, asserted, inferred, draft." },
+    { "@id": "sap:method", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Provenance" },
+      "rdfs:range":  { "@id": "xsd:string" },
+      "rdfs:comment": "One of: manual, ETL, LLM-extracted." }
+  ]
+}
