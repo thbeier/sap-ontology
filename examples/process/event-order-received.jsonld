@@ -1,0 +1,9 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:event-order-received",
+  "@type": ["sap:Event", "sap:DomainInstance"],
+  "sap:name": "Order Received",
+  "sap:eventType": "start",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

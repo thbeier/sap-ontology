@@ -1,0 +1,10 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:doc-sales-order",
+  "@type": ["sap:BusinessDocument", "sap:DomainInstance"],
+  "sap:name": "Sales Order",
+  "sap:format": "structured",
+  "sap:legalStatus": "commercial",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

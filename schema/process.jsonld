@@ -1,0 +1,32 @@
+{
+  "@context": "../context/sap-ontology-context.jsonld",
+  "@graph": [
+    { "@id": "sap:Process", "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
+      "rdfs:label": "Process",
+      "rdfs:comment": "Any non-leaf process node — recursive. Covers value chains (L1), process groups (L2), processes (L3), sub-processes (L4)." },
+    { "@id": "sap:Activity", "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
+      "rdfs:label": "Activity",
+      "rdfs:comment": "Leaf — atomic business step performed by a role or system (L5). Cannot contain other Activities." },
+    { "@id": "sap:Event", "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
+      "rdfs:label": "Event" },
+    { "@id": "sap:Decision", "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
+      "rdfs:label": "Decision" },
+    { "@id": "sap:BusinessDocument", "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
+      "rdfs:label": "Business Document" },
+
+    { "@id": "sap:valueStream",   "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:kpiMetrics",    "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:isAutomated",   "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:boolean" } },
+    { "@id": "sap:averageDuration","@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:duration" } },
+    { "@id": "sap:volume",        "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:integer" } },
+    { "@id": "sap:eventType",     "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:decisionRule",  "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:format",        "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:legalStatus",   "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } }
+  ]
+}

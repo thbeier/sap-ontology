@@ -1,0 +1,13 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:process-o2c",
+  "@type": ["sap:Process", "sap:DomainInstance"],
+  "sap:name": "Order-to-Cash",
+  "sap:processLevel": "L3_Process",
+  "sap:externalId": "APQC-4.1",
+  "sap:contains": [
+    { "@id": "sap:process-order-entry" }
+  ],
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

@@ -1,0 +1,49 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix sap:  <https://sap-ontology.deloitte.com/vocab#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+sap:ProcessShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Process ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ;         sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:processLevel ; sh:datatype xsd:string ; sh:minCount 1 ;
+        sh:message "processLevel is required. Use L1_ValueChain / L2_ProcessGroup / L3_Process / L4_SubProcess or a documented client-specific label." ;
+        sh:or (
+            [ sh:in ( "L1_ValueChain" "L2_ProcessGroup" "L3_Process" "L4_SubProcess" ) ]
+            [ sh:pattern "^L\\d+_[A-Za-z]+$" ]
+        ) ] ;
+    sh:property [ sh:path sap:bpmnType ; sh:datatype xsd:string ;
+        sh:in ( "embedded" "call" "event-sub-process" ) ] ;
+    sh:property [ sh:path sap:contains ;
+        sh:or (
+            [ sh:class sap:Process ]
+            [ sh:class sap:Activity ]
+        ) ] .
+
+sap:ActivityShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Activity ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ;        sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:isAutomated ; sh:datatype xsd:boolean ] .
+
+sap:EventShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Event ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ;      sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:eventType ; sh:datatype xsd:string ;
+        sh:in ( "start" "intermediate" "end" "message" "timer" "signal" ) ] .
+
+sap:DecisionShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Decision ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] .
+
+sap:BusinessDocumentShape
+    a sh:NodeShape ;
+    sh:targetClass sap:BusinessDocument ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] .

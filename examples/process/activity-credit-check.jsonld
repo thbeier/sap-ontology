@@ -1,0 +1,9 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:activity-credit-check",
+  "@type": ["sap:Activity", "sap:DomainInstance"],
+  "sap:name": "Check Credit Limit",
+  "sap:isAutomated": true,
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}
