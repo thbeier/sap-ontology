@@ -1,0 +1,31 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix sap:  <https://sap-ontology.deloitte.com/vocab#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+sap:OrgUnitShape
+    a sh:NodeShape ;
+    sh:targetClass sap:OrgUnit ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:type ; sh:datatype xsd:string ;
+        sh:in ( "company" "BU" "department" "team" "sales-org"
+                "distribution-channel" "plant" "company-code" "credit-control-area" ) ; sh:minCount 1 ] .
+
+sap:RoleShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Role ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] .
+
+sap:CapabilityShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Capability ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] .
+
+sap:UserShape
+    a sh:NodeShape ;
+    sh:targetClass sap:User ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:userId ;      sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:displayName ; sh:datatype xsd:string ; sh:minCount 1 ] .

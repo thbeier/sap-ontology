@@ -1,0 +1,11 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:orgunit-sales-org-us01",
+  "@type": ["sap:OrgUnit", "sap:DomainInstance"],
+  "sap:name": "Sales Organization US01",
+  "sap:type": "sales-org",
+  "sap:jurisdiction": "US",
+  "sap:sapCompanyCode": "1000",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

@@ -1,0 +1,9 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:capability-credit-management",
+  "@type": ["sap:Capability", "sap:DomainInstance"],
+  "sap:name": "Credit Management",
+  "sap:maturityLevel": "defined",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

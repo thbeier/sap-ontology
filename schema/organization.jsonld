@@ -1,0 +1,25 @@
+{
+  "@context": "../context/sap-ontology-context.jsonld",
+  "@graph": [
+    { "@id": "sap:OrgUnit", "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" }, "rdfs:label": "Organizational Unit" },
+    { "@id": "sap:Role", "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" }, "rdfs:label": "Role" },
+    { "@id": "sap:Capability", "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" }, "rdfs:label": "Capability" },
+    { "@id": "sap:User", "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
+      "rdfs:label": "User",
+      "rdfs:comment": "GDPR-gated. Do not populate by default — only at engagements where the use case justifies it." },
+
+    { "@id": "sap:jurisdiction",      "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:sapCompanyCode",    "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:responsibilityLevel","@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:grantsAuthorizations","@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:maturityLevel",     "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:userId",            "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:displayName",       "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:employmentStatus",  "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:lastLogin",         "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:dateTime" } }
+  ]
+}

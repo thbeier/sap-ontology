@@ -1,0 +1,10 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:role-credit-manager",
+  "@type": ["sap:Role", "sap:DomainInstance"],
+  "sap:name": "Credit Manager",
+  "sap:responsibilityLevel": "L2",
+  "sap:grantsAuthorizations": "FD32-change, VKM1-release",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}
