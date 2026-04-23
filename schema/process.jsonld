@@ -27,6 +27,18 @@
     { "@id": "sap:eventType",     "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
     { "@id": "sap:decisionRule",  "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
     { "@id": "sap:format",        "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
-    { "@id": "sap:legalStatus",   "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } }
+    { "@id": "sap:legalStatus",   "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+
+    { "@id": "sap:contains",    "@type": "owl:ObjectProperty" },
+    { "@id": "sap:followedBy",  "@type": "owl:ObjectProperty" },
+    { "@id": "sap:produces",    "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:Activity" },
+      "rdfs:range":  { "@id": "sap:BusinessDocument" } },
+    { "@id": "sap:consumesDoc", "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:Activity" },
+      "rdfs:range":  { "@id": "sap:BusinessDocument" } },
+    { "@id": "sap:routesTo",    "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:Decision" },
+      "rdfs:range":  { "@id": "sap:Activity" } }
   ]
 }

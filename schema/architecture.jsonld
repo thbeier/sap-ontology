@@ -34,6 +34,19 @@
     { "@id": "sap:deployment",        "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
     { "@id": "sap:tier",              "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
     { "@id": "sap:masterSystem",      "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
-    { "@id": "sap:classification",    "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } }
+    { "@id": "sap:classification",    "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+
+    { "@id": "sap:hostedOn",       "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:ApplicationComponent" },
+      "rdfs:range":  { "@id": "sap:TechnologyBuildingBlock" } },
+    { "@id": "sap:mastersDataFor", "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:ApplicationComponent" },
+      "rdfs:range":  { "@id": "sap:DataObject" } },
+    { "@id": "sap:transports",     "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:Integration" },
+      "rdfs:range":  { "@id": "sap:DataObject" } },
+    { "@id": "sap:dependsOn",      "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:ApplicationComponent" },
+      "rdfs:range":  { "@id": "sap:ApplicationComponent" } }
   ]
 }

@@ -20,6 +20,14 @@
     { "@id": "sap:userId",            "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
     { "@id": "sap:displayName",       "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
     { "@id": "sap:employmentStatus",  "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
-    { "@id": "sap:lastLogin",         "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:dateTime" } }
+    { "@id": "sap:lastLogin",         "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:dateTime" } },
+
+    { "@id": "sap:partOf",     "@type": "owl:ObjectProperty" },
+    { "@id": "sap:occupiedBy", "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:Role" },
+      "rdfs:range":  { "@id": "sap:User" } },
+    { "@id": "sap:memberOf",   "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:User" },
+      "rdfs:range":  { "@id": "sap:OrgUnit" } }
   ]
 }

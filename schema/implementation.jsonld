@@ -35,6 +35,16 @@
     { "@id": "sap:reportedAt",    "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:dateTime" } },
     { "@id": "sap:resolvedAt",    "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:dateTime" } },
     { "@id": "sap:source",        "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
-    { "@id": "sap:acceptanceCriteria","@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } }
+    { "@id": "sap:acceptanceCriteria","@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+
+    { "@id": "sap:includes",    "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:Change" },
+      "rdfs:range":  { "@id": "sap:Configuration" } },
+    { "@id": "sap:carriedBy",   "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:Change" },
+      "rdfs:range":  { "@id": "sap:Transport" } },
+    { "@id": "sap:resultsIn",   "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:Incident" },
+      "rdfs:range":  { "@id": "sap:Change" } }
   ]
 }
