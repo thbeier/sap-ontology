@@ -1,0 +1,11 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:int-sd-fi-credit",
+  "@type": ["sap:Integration", "sap:DomainInstance"],
+  "sap:name": "SD↔FI Credit Check",
+  "sap:integrationType": "RFC",
+  "sap:direction": "bidirectional",
+  "sap:frequency": "real-time",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

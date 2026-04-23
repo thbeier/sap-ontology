@@ -1,0 +1,11 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:app-sd-module",
+  "@type": ["sap:ApplicationComponent", "sap:DomainInstance"],
+  "sap:name": "SAP S/4HANA SD Module",
+  "sap:lifecycleState": "live",
+  "sap:vendor": "SAP",
+  "sap:businessCriticality": "high",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

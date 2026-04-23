@@ -1,0 +1,11 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:tech-hana-db",
+  "@type": ["sap:TechnologyBuildingBlock", "sap:DomainInstance"],
+  "sap:name": "SAP HANA Database",
+  "sap:vendor": "SAP",
+  "sap:deployment": "cloud",
+  "sap:tier": "database",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

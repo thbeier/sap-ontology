@@ -1,0 +1,35 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix sap:  <https://sap-ontology.deloitte.com/vocab#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+sap:ApplicationComponentShape
+    a sh:NodeShape ;
+    sh:targetClass sap:ApplicationComponent ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ;           sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:lifecycleState ; sh:datatype xsd:string ;
+        sh:in ( "planned" "live" "sunset" "retired" ) ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+sap:IntegrationShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Integration ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ;            sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:integrationType ; sh:datatype xsd:string ;
+        sh:in ( "RFC" "OData" "IDoc" "File" "API" ) ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+sap:TechnologyBuildingBlockShape
+    a sh:NodeShape ;
+    sh:targetClass sap:TechnologyBuildingBlock ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ;       sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:deployment ; sh:datatype xsd:string ;
+        sh:in ( "on-prem" "cloud" "hybrid" ) ] .
+
+sap:DataObjectShape
+    a sh:NodeShape ;
+    sh:targetClass sap:DataObject ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ;           sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:classification ; sh:datatype xsd:string ;
+        sh:in ( "master" "transactional" "reference" ) ; sh:minCount 1 ] .

@@ -1,0 +1,39 @@
+{
+  "@context": "../context/sap-ontology-context.jsonld",
+  "@graph": [
+    { "@id": "sap:ApplicationComponent", "@type": "owl:Class",
+      "rdfs:label": "Application Component",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
+      "rdfs:comment": "A deployable software unit providing business functionality." },
+    { "@id": "sap:Integration", "@type": "owl:Class",
+      "rdfs:label": "Integration",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
+      "rdfs:comment": "A data or control flow between two components." },
+    { "@id": "sap:TechnologyBuildingBlock", "@type": "owl:Class",
+      "rdfs:label": "Technology Building Block",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
+      "rdfs:comment": "Infrastructure / platform layer (OS, DB, middleware, cloud service)." },
+    { "@id": "sap:DataObject", "@type": "owl:Class",
+      "rdfs:label": "Data Object",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
+      "rdfs:comment": "Logical data entity exchanged or persisted." },
+
+    { "@id": "sap:DomainInstance", "@type": "owl:Class",
+      "rdfs:label": "Domain Instance",
+      "rdfs:comment": "Abstract superclass of every non-schema, non-Scenario, non-Provenance instance." },
+
+    { "@id": "sap:lifecycleState",   "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:vendor",            "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:businessCriticality","@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:functionalFit",     "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:technicalFit",      "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:integrationType",   "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:direction",         "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:frequency",         "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:version",           "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:deployment",        "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:tier",              "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:masterSystem",      "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:classification",    "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } }
+  ]
+}
