@@ -1,0 +1,44 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix sap:  <https://sap-ontology.deloitte.com/vocab#> .
+
+# The inter-domain relations whose targets are a single class:
+# `sh:class` is enforced as a property shape on the owning class's node shape
+# (see shapes/process.shacl.ttl, shapes/implementation.shacl.ttl, etc.).
+# This file holds polymorphic-target cases where the range is "any of N classes".
+
+sap:LinkedToShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf sap:linkedTo ;
+    sh:property [
+        sh:path sap:linkedTo ;
+        sh:or (
+            [ sh:class sap:Activity ]
+            [ sh:class sap:ApplicationComponent ]
+            [ sh:class sap:Configuration ]
+        ) ;
+        sh:message "Incident.linkedTo must target an Activity, ApplicationComponent, or Configuration." ;
+    ] .
+
+sap:OwnsShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf sap:owns ;
+    sh:property [
+        sh:path sap:owns ;
+        sh:or (
+            [ sh:class sap:Configuration ]
+            [ sh:class sap:Process ]
+        ) ;
+        sh:message "OrgUnit.owns must target a Configuration or Process." ;
+    ] .
+
+sap:ValidatesShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf sap:validates ;
+    sh:property [
+        sh:path sap:validates ;
+        sh:or (
+            [ sh:class sap:Change ]
+            [ sh:class sap:Configuration ]
+            [ sh:class sap:Activity ]
+        ) ;
+    ] .

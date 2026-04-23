@@ -9,13 +9,16 @@ sap:OrgUnitShape
     sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path sap:type ; sh:datatype xsd:string ;
         sh:in ( "company" "BU" "department" "team" "sales-org"
-                "distribution-channel" "plant" "company-code" "credit-control-area" ) ; sh:minCount 1 ] .
+                "distribution-channel" "plant" "company-code" "credit-control-area" ) ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:consumes ; sh:class sap:ApplicationComponent ] .
 
 sap:RoleShape
     a sh:NodeShape ;
     sh:targetClass sap:Role ;
     sh:node sap:DomainInstanceShape ;
-    sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] .
+    sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:executes ;       sh:class sap:Activity ] ;
+    sh:property [ sh:path sap:authorizedFor ;  sh:class sap:Configuration ] .
 
 sap:CapabilityShape
     a sh:NodeShape ;

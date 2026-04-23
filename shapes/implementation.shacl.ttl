@@ -16,7 +16,8 @@ sap:ChangeShape
     sh:node sap:DomainInstanceShape ;
     sh:property [ sh:path sap:name ;   sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path sap:status ; sh:datatype xsd:string ;
-        sh:in ( "draft" "requested" "approved" "in-progress" "deployed" "rejected" "rolled-back" ) ; sh:minCount 1 ] .
+        sh:in ( "draft" "requested" "approved" "in-progress" "deployed" "rejected" "rolled-back" ) ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:affects ; sh:class sap:Configuration ] .
 
 sap:TransportShape
     a sh:NodeShape ;
@@ -48,4 +49,6 @@ sap:RequirementShape
     sh:targetClass sap:Requirement ;
     sh:node sap:DomainInstanceShape ;
     sh:property [ sh:path sap:name ;     sh:datatype xsd:string ; sh:minCount 1 ] ;
-    sh:property [ sh:path sap:priority ; sh:datatype xsd:string ] .
+    sh:property [ sh:path sap:priority ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path sap:targetsScenario ; sh:class sap:Scenario ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:implementedBy ;   sh:class sap:Change ] .

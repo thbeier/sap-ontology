@@ -19,14 +19,17 @@ sap:ProcessShape
         sh:or (
             [ sh:class sap:Process ]
             [ sh:class sap:Activity ]
-        ) ] .
+        ) ] ;
+    sh:property [ sh:path sap:realizesCapability ; sh:class sap:Capability ] .
 
 sap:ActivityShape
     a sh:NodeShape ;
     sh:targetClass sap:Activity ;
     sh:node sap:DomainInstanceShape ;
     sh:property [ sh:path sap:name ;        sh:datatype xsd:string ; sh:minCount 1 ] ;
-    sh:property [ sh:path sap:isAutomated ; sh:datatype xsd:boolean ] .
+    sh:property [ sh:path sap:isAutomated ; sh:datatype xsd:boolean ] ;
+    sh:property [ sh:path sap:supportedBy ; sh:class sap:ApplicationComponent ] ;
+    sh:property [ sh:path sap:realizedBy ;  sh:class sap:Configuration ] .
 
 sap:EventShape
     a sh:NodeShape ;
@@ -46,4 +49,5 @@ sap:BusinessDocumentShape
     a sh:NodeShape ;
     sh:targetClass sap:BusinessDocument ;
     sh:node sap:DomainInstanceShape ;
-    sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] .
+    sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:represents ; sh:class sap:DataObject ] .
