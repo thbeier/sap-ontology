@@ -1,0 +1,9 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:scenario-to-be-chf-expansion",
+  "@type": "sap:Scenario",
+  "sap:name": "to-be-chf-expansion",
+  "sap:scenarioType": "to-be",
+  "sap:lifecycleState": "draft",
+  "sap:projectLink": "https://example.com/project/chf-expansion"
+}

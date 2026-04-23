@@ -1,0 +1,9 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:scenario-as-is",
+  "@type": "sap:Scenario",
+  "sap:name": "as-is",
+  "sap:scenarioType": "as-is",
+  "sap:lifecycleState": "active",
+  "sap:validFrom": "2026-01-01T00:00:00Z"
+}

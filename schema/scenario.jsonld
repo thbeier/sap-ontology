@@ -1,0 +1,25 @@
+{
+  "@context": "../context/sap-ontology-context.jsonld",
+  "@graph": [
+    { "@id": "sap:Scenario", "@type": "owl:Class",
+      "rdfs:label": "Scenario",
+      "rdfs:comment": "A named state of the landscape. Every non-schema instance connects to at least one Scenario via sap:inScenario." },
+    { "@id": "sap:scenarioType", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Scenario" },
+      "rdfs:range":  { "@id": "xsd:string" },
+      "rdfs:comment": "One of: as-is, to-be, variant." },
+    { "@id": "sap:lifecycleState", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Scenario" },
+      "rdfs:range":  { "@id": "xsd:string" },
+      "rdfs:comment": "One of: draft, active, locked, superseded." },
+    { "@id": "sap:validFrom", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Scenario" },
+      "rdfs:range":  { "@id": "xsd:dateTime" } },
+    { "@id": "sap:validUntil", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Scenario" },
+      "rdfs:range":  { "@id": "xsd:dateTime" } },
+    { "@id": "sap:projectLink", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Scenario" },
+      "rdfs:range":  { "@id": "xsd:anyURI" } }
+  ]
+}

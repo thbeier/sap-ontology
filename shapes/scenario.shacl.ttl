@@ -1,0 +1,27 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix sap:  <https://sap-ontology.deloitte.com/vocab#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+sap:ScenarioShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Scenario ;
+    sh:property [
+        sh:path sap:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sap:scenarioType ;
+        sh:datatype xsd:string ;
+        sh:in ( "as-is" "to-be" "variant" ) ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sap:lifecycleState ;
+        sh:datatype xsd:string ;
+        sh:in ( "draft" "active" "locked" "superseded" ) ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] .
