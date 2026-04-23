@@ -1,0 +1,20 @@
+[project]
+name = "sap-ontology"
+version = "0.1.0"
+description = "SAP Ontology for Context Engineering — upper model and SHACL shapes"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "CC-BY-SA-4.0" }
+authors = [{ name = "Deloitte SAP Ontology Working Group" }]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pyshacl>=0.26",
+  "PyLD>=2.0",
+  "rdflib>=7.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
