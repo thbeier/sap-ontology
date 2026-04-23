@@ -1,0 +1,26 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix sap:  <https://sap-ontology.deloitte.com/vocab#> .
+
+# sap:DomainInstance is a marker class. Every concrete domain class
+# (ApplicationComponent, Process, Activity, Configuration, ...) declares
+# its instances to be of type sap:DomainInstance (multi-type in JSON-LD)
+# OR the class-specific shape uses sh:node sap:DomainInstanceShape.
+# We use the latter pattern — see class shapes in Tasks 7-10.
+
+sap:DomainInstanceShape
+    a sh:NodeShape ;
+    sh:property [
+        sh:path sap:hasProvenance ;
+        sh:minCount 1 ;
+        sh:message "Every domain instance must carry at least one Provenance." ;
+    ] ;
+    sh:property [
+        sh:path sap:inScenario ;
+        sh:minCount 1 ;
+        sh:message "Every domain instance must exist in at least one Scenario." ;
+    ] .
+
+sap:DomainInstanceTargetedShape
+    a sh:NodeShape ;
+    sh:targetClass sap:DomainInstance ;
+    sh:node sap:DomainInstanceShape .
