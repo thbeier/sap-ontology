@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SAP Ontology — vocab namespace</title>
+<meta name="description" content="The sap: namespace for the SAP Ontology upper model. Dereferences class and property IRIs.">
+<style>body{font-family:system-ui;max-width:48rem;margin:2rem auto;padding:0 1rem;line-height:1.5}code{background:#f4f4f4;padding:0.1rem 0.3rem;border-radius:3px}</style>
+</head>
+<body>
+<h1>SAP Ontology — <code>sap:</code> namespace</h1>
+<p>This IRI (<code>https://thbeier.github.io/sap-ontology/vocab#</code>) is the namespace for the SAP Ontology upper model, v0.1.1.</p>
+<p>Class and property IRIs have the form <code>sap:ClassName</code> or <code>sap:propertyName</code>. For example, <code>sap:ApplicationComponent</code> resolves to <code>https://thbeier.github.io/sap-ontology/vocab#ApplicationComponent</code>.</p>
+<h2>Definitions</h2>
+<p>Class and property definitions live in JSON-LD schema files:</p>
+<ul>
+<li><a href="../schema/architecture.jsonld">Architecture domain</a> — ApplicationComponent, Integration, TechnologyBuildingBlock, DataObject</li>
+<li><a href="../schema/process.jsonld">Process domain</a> — Process, Activity, Event, Decision, BusinessDocument</li>
+<li><a href="../schema/implementation.jsonld">Implementation/Change domain</a> — Configuration, Change, Transport, TestCase, Incident, Requirement</li>
+<li><a href="../schema/organization.jsonld">Organization cross-cutter</a> — OrgUnit, Role, Capability, User</li>
+<li><a href="../schema/scenario.jsonld">Scenario cross-cutter</a> — Scenario, ScenarioDiff</li>
+<li><a href="../schema/provenance.jsonld">Provenance</a></li>
+<li><a href="../schema/relations.jsonld">Inter-domain relations</a></li>
+</ul>
+<h2>Machine-readable</h2>
+<p>JSON-LD context: <a href="../context/sap-context.jsonld"><code>context/sap-context.jsonld</code></a></p>
+<p>SHACL shapes: <a href="../shapes/"><code>shapes/</code></a></p>
+<p>Current version: <a href="https://github.com/thbeier/sap-ontology/releases/tag/v0.1.1">v0.1.1</a> · <a href="https://github.com/thbeier/sap-ontology">Source on GitHub</a></p>
+</body>
+</html>
