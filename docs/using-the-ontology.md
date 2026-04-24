@@ -41,7 +41,7 @@ pyshacl -s shapes/base.shacl.ttl \
 
 ## Copying files into your own project
 
-When integrating the upper model into another codebase, **preserve the directory structure** (`schema/`, `shapes/`, `context/`). The SHACL shapes in `shapes/` load the JSON-LD context from `../context/sap-ontology-context.jsonld` via relative path. Copying all files into a flat directory breaks shape loading.
+When integrating the upper model into another codebase, **preserve the directory structure** (`schema/`, `shapes/`, `context/`). The schema and example files reference the JSON-LD context via relative path (`../context/sap-ontology-context.jsonld` from `schema/`, `../../context/sap-ontology-context.jsonld` from `examples/*/`). Copying all files into a flat directory breaks these references and, through them, the default SHACL-validation flow used by the project's test suite and CLI tooling.
 
 Correct layout in your consumer repo:
 
