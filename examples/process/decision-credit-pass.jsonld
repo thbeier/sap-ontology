@@ -4,6 +4,7 @@
   "@type": ["sap:Decision", "sap:DomainInstance"],
   "sap:name": "Credit Pass / Fail",
   "sap:decisionRule": "customer.creditExposure + order.netValue <= customer.creditLimit",
+  "routesTo": [{ "@id": "sap:activity-confirm-order" }],
   "sap:inScenario": { "@id": "sap:scenario-as-is" },
   "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
 }

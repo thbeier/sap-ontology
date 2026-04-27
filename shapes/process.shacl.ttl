@@ -26,8 +26,13 @@ sap:ActivityShape
     a sh:NodeShape ;
     sh:targetClass sap:Activity ;
     sh:node sap:DomainInstanceShape ;
-    sh:property [ sh:path sap:name ;        sh:datatype xsd:string ; sh:minCount 1 ] ;
-    sh:property [ sh:path sap:isAutomated ; sh:datatype xsd:boolean ] ;
+    sh:property [ sh:path sap:name ;            sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:isAutomated ;     sh:datatype xsd:boolean ] ;
+    sh:property [ sh:path sap:transactionCode ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:message "transactionCode is the canonical SAP T-code executing this Activity (e.g. VA01). Variant T-codes belong in description, not as additional transactionCode values." ;
+        sh:pattern "^[A-Z][A-Z0-9_./-]+$" ] ;
     sh:property [ sh:path sap:supportedBy ; sh:class sap:ApplicationComponent ] ;
     sh:property [ sh:path sap:realizedBy ;  sh:class sap:Configuration ] .
 
@@ -43,7 +48,11 @@ sap:DecisionShape
     a sh:NodeShape ;
     sh:targetClass sap:Decision ;
     sh:node sap:DomainInstanceShape ;
-    sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] .
+    sh:property [ sh:path sap:name ;         sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:decisionRule ; sh:datatype xsd:string ; sh:minCount 1 ;
+        sh:message "Every Decision must declare its branching rule as a human-readable expression in decisionRule (e.g. 'credit_score >= 600' or 'order_value > approval_threshold')." ] ;
+    sh:property [ sh:path sap:routesTo ;     sh:class sap:Activity ; sh:minCount 1 ;
+        sh:message "Every Decision must route to at least one Activity (the gateway's onward path). Branching is expressed by multiple routesTo edges." ] .
 
 sap:BusinessDocumentShape
     a sh:NodeShape ;

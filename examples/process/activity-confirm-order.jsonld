@@ -1,10 +1,10 @@
 {
   "@context": "../../context/sap-ontology-context.jsonld",
-  "@id": "sap:activity-credit-check",
+  "@id": "sap:activity-confirm-order",
   "@type": ["sap:Activity", "sap:DomainInstance"],
-  "sap:name": "Check Credit Limit",
-  "sap:isAutomated": true,
-  "transactionCode": "VKM4",
+  "sap:name": "Confirm Sales Order",
+  "sap:isAutomated": false,
+  "transactionCode": "VA02",
   "sap:inScenario": { "@id": "sap:scenario-as-is" },
   "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
 }

@@ -8,6 +8,7 @@ PROC_EXAMPLES = [
     "process-o2c.jsonld",
     "process-order-entry.jsonld",
     "activity-credit-check.jsonld",
+    "activity-confirm-order.jsonld",
     "event-order-received.jsonld",
     "decision-credit-pass.jsonld",
     "doc-sales-order.jsonld",
