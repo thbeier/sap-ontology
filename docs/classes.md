@@ -1,6 +1,14 @@
 # Class Catalog
 
-Generated in Task 16. For machine-readable definitions see `schema/*.jsonld`.
+For machine-readable definitions see `schema/*.jsonld`. For the full property list per class, read the schema files directly — this page lists classes only.
+
+## Notable datatype properties (v0.2.0)
+
+| Property | Domain | Range | Purpose |
+|---|---|---|---|
+| `sap:transactionCode` | `sap:Activity` | `xsd:string` | Canonical SAP T-code that executes the Activity (e.g., `VA01`). Constrained by `sh:pattern` to `^[A-Z][A-Z0-9_./-]+$`. |
+| `sap:configurationTransaction` | `sap:Configuration` | `xsd:string` | Canonical SPRO/IMG transaction maintaining the Configuration (e.g., `VOV8`, `V/08`). Same regex as `transactionCode`. |
+| `sap:decisionRule` | `sap:Decision` | `xsd:string` | Branching rule expression (required as of v0.2.0). |
 
 ## Architecture
 | Class | Purpose |

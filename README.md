@@ -2,7 +2,7 @@
 
 A technology-independent, Deloitte-curated semantic model for reasoning across SAP **Architecture × Business Process × Implementation / Change**, with Organization and Scenario as cross-cutting dimensions.
 
-**Status:** v0.1.0 (MVP) — upper model + SHACL shapes + canonical examples only. No runtime.
+**Status:** v0.2.0 — upper model + SHACL shapes + canonical examples. The companion [federation runtime](#runtime-companion) (Excel/CSV ingestion → Neo4j) lives in a separate proprietary repository.
 **License:** Upper model, SHACL shapes, and examples are released under [CC-BY-SA 4.0](LICENSE). Mapper configurations and federation runtime are Deloitte proprietary.
 
 ## What's here
@@ -26,6 +26,16 @@ pytest
 ```
 
 See [`docs/overview.md`](docs/overview.md) for the design rationale, [`docs/classes.md`](docs/classes.md) for the class catalog, and [`docs/using-the-ontology.md`](docs/using-the-ontology.md) for how to sub-class in a client engagement.
+
+## Runtime companion
+
+A separate proprietary repository (`sap-ontology-runtime`) consumes this schema as a pinned dependency and provides:
+
+- Excel/CSV ingestion for SAP consultants who author scenarios in spreadsheets
+- JSON-LD ↔ SHACL ↔ Neo4j pipeline with per-tenant databases
+- Scenario fork / mutate / promote / diff operations for as-is → to-be reasoning
+
+The runtime is what surfaces findings (like `sap:transactionCode` and the tightened `DecisionShape` in v0.2.0) that flow back into this schema repository.
 
 ## Contributing
 
