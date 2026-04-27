@@ -26,6 +26,12 @@
     { "@id": "sap:volume",        "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:integer" } },
     { "@id": "sap:eventType",     "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
     { "@id": "sap:decisionRule",  "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
+    { "@id": "sap:transactionCode",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Activity" },
+      "rdfs:range":  { "@id": "xsd:string" },
+      "rdfs:label":  "Transaction Code",
+      "rdfs:comment": "SAP transaction code (T-code) that executes this activity, e.g. 'VA01' for Create Sales Order. The executable handle for an Activity, distinct from the SPRO transaction that configures a Configuration. Multiple variant T-codes (VA02 change, VA03 display, VA05 list) belong in description; transactionCode names the canonical entry point." },
     { "@id": "sap:format",        "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
     { "@id": "sap:legalStatus",   "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
 

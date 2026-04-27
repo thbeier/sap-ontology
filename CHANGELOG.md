@@ -2,6 +2,24 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- **`sap:transactionCode`** (`owl:DatatypeProperty`, `xsd:string`, domain `sap:Activity`). Canonical SAP T-code that executes an Activity (e.g., `VA01` for Create Sales Order). Replaces the prior pattern of overloading `sap:externalId` with executable handles. Aliased in context as `transactionCode` (no `@type` annotation — emit as plain string to avoid SHACL `sh:in` term-equality footguns).
+- **`sap:configurationTransaction`** (`owl:DatatypeProperty`, `xsd:string`, domain `sap:Configuration`). Canonical SPRO/IMG transaction that maintains a Configuration (e.g., `VOV8` for sales document types, `V/08` for pricing procedures). Mirrors `transactionCode` on the customizing side. Aliased in context as `configurationTransaction`.
+
+### Changed
+- **`sap:ActivityShape`** adds optional `sap:transactionCode` constraint with `sh:maxCount 1` and pattern `^[A-Z][A-Z0-9_./-]+$`. The canonical entry-point T-code is unique per Activity; variants (VA02 change, VA03 display) belong in `description`.
+- **`sap:ConfigurationShape`** adds optional `sap:configurationTransaction` constraint with the same regex. SPRO codes that include slashes (`V/08`) and dots (`F.05`) match.
+- **`sap:DecisionShape`** tightened from a single `sap:name` constraint to require:
+  - `sap:decisionRule` (xsd:string, minCount 1) — branching rule expression
+  - `sap:routesTo` → `sap:Activity` (minCount 1) — at least one onward path
+  Rationale: a Decision with neither rule nor routing is structurally meaningless.
+
+### Note for adopters
+- Existing data using `sap:externalId` for T-codes continues to validate — `externalId` remains in the schema as a generic cross-system identifier. Migration is opt-in: rename `external_id` columns to `transaction_code` in fixture authoring tools when ready.
+- The new `sap:DecisionShape` constraints are tighter than v0.1.x. Any existing Decision instance lacking `decisionRule` or `routesTo` will now fail SHACL validation. Audit existing Decisions before upgrading consumers.
+
 ## [0.1.1] — 2026-04-23
 
 ### Changed

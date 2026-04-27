@@ -6,6 +6,7 @@
   "sap:type": "customizing",
   "sap:scope": "client-wide",
   "sap:mutability": "stable",
+  "configurationTransaction": "V/08",
   "sap:inScenario": { "@id": "sap:scenario-as-is" },
   "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
 }
