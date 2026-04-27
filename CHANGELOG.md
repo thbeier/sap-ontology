@@ -2,7 +2,7 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
-## [Unreleased]
+## [0.2.0] — 2026-04-27
 
 ### Added
 - **`sap:transactionCode`** (`owl:DatatypeProperty`, `xsd:string`, domain `sap:Activity`). Canonical SAP T-code that executes an Activity (e.g., `VA01` for Create Sales Order). Replaces the prior pattern of overloading `sap:externalId` with executable handles. Aliased in context as `transactionCode` (no `@type` annotation — emit as plain string to avoid SHACL `sh:in` term-equality footguns).

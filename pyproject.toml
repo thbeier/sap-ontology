@@ -1,6 +1,6 @@
 [project]
 name = "sap-ontology"
-version = "0.1.0"
+version = "0.2.0"
 description = "SAP Ontology for Context Engineering — upper model and SHACL shapes"
 readme = "README.md"
 requires-python = ">=3.11"
