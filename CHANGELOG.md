@@ -20,6 +20,9 @@ All notable changes to this ontology are documented here. Format follows [Keep a
 - Existing data using `sap:externalId` for T-codes continues to validate — `externalId` remains in the schema as a generic cross-system identifier. Migration is opt-in: rename `external_id` columns to `transaction_code` in fixture authoring tools when ready.
 - The new `sap:DecisionShape` constraints are tighter than v0.1.x. Any existing Decision instance lacking `decisionRule` or `routesTo` will now fail SHACL validation. Audit existing Decisions before upgrading consumers.
 
+### Provenance of this release
+The two new properties and the tightened DecisionShape were surfaced by the Excel/CSV ingestion pilot in the federation runtime: SAP consultants authoring scenarios in spreadsheets need a single canonical column for the executable handle of an Activity (T-code) and a parallel column for the configuring transaction of a Configuration (SPRO code). Overloading `externalId` with both proved error-prone in the runtime's mapper allowlist; carving out dedicated properties solved the ambiguity. The DecisionShape change came from real fixture data where Decisions without rules or routing were silently accepted and produced unanswerable graph queries.
+
 ## [0.1.1] — 2026-04-23
 
 ### Changed
