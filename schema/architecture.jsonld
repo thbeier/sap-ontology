@@ -42,9 +42,11 @@
     { "@id": "sap:mastersDataFor", "@type": "owl:ObjectProperty",
       "rdfs:domain": { "@id": "sap:ApplicationComponent" },
       "rdfs:range":  { "@id": "sap:DataObject" } },
-    { "@id": "sap:transports",     "@type": "owl:ObjectProperty",
+    { "@id": "sap:carries",        "@type": "owl:ObjectProperty",
       "rdfs:domain": { "@id": "sap:Integration" },
-      "rdfs:range":  { "@id": "sap:DataObject" } },
+      "rdfs:range":  { "@id": "sap:DataObject" },
+      "rdfs:label":  "carries",
+      "rdfs:comment": "Runtime data payload carried by an Integration. Renamed from sap:transports (v0.2) to remove the lexical collision with the change-management class sap:Transport (CTS request). Use sap:carriedBy on Change->Transport for promotion-of-customizing; use sap:carries on Integration->DataObject for runtime data flow." },
     { "@id": "sap:dependsOn",      "@type": "owl:ObjectProperty",
       "rdfs:domain": { "@id": "sap:ApplicationComponent" },
       "rdfs:range":  { "@id": "sap:ApplicationComponent" } }

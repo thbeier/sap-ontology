@@ -7,7 +7,7 @@
 |---|---|
 | `sap:hostedOn` | ApplicationComponent → TechnologyBuildingBlock |
 | `sap:mastersDataFor` | ApplicationComponent → DataObject |
-| `sap:transports` | Integration → DataObject |
+| `sap:carries` | Integration → DataObject |
 | `sap:dependsOn` | ApplicationComponent → ApplicationComponent |
 
 ### Business Process

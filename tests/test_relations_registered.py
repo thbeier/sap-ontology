@@ -9,7 +9,7 @@ VOCAB = "https://thbeier.github.io/sap-ontology/vocab#"
 
 INTRA = [
     # Architecture
-    "hostedOn", "mastersDataFor", "transports", "dependsOn",
+    "hostedOn", "mastersDataFor", "carries", "dependsOn",
     # Process
     "contains", "followedBy", "produces", "consumesDoc", "routesTo",
     # Implementation

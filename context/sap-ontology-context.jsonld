@@ -43,7 +43,7 @@
     "routesTo":      { "@id": "sap:routesTo",      "@type": "@id" },
     "hostedOn":      { "@id": "sap:hostedOn",      "@type": "@id" },
     "mastersDataFor":{ "@id": "sap:mastersDataFor","@type": "@id" },
-    "transports":    { "@id": "sap:transports",    "@type": "@id" },
+    "carries":       { "@id": "sap:carries",       "@type": "@id" },
     "dependsOn":     { "@id": "sap:dependsOn",     "@type": "@id" },
     "partOf":        { "@id": "sap:partOf",        "@type": "@id" },
     "occupiedBy":    { "@id": "sap:occupiedBy",    "@type": "@id" },

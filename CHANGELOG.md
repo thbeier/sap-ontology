@@ -2,6 +2,24 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.3.0] — 2026-05-01
+
+### Changed (BREAKING)
+- **`sap:transports` → `sap:carries`** on `Integration → DataObject`. The relation has been renamed to remove the lexical collision with the change-management class `sap:Transport` (CTS request). `sap:Transport` and `sap:carriedBy` (`Change → Transport`) are unchanged. Rationale: the verb `transports` and the noun `Transport` are spelled identically but denote orthogonal concepts (a runtime data flow vs. a workbench/customizing promotion artifact). The collision caused a downstream runtime mapper bug where `Integration.transports` was incorrectly routed to the `Transport` class instead of `DataObject`. The rename is permanent — there is no transitional alias.
+- `sap:carries` carries a new `rdfs:label` ("carries") and a `rdfs:comment` documenting the rename and explicitly distinguishing it from `sap:Transport` / `sap:carriedBy`.
+
+### Migration
+- **JSON-LD instances:** rename property `sap:transports` (long form) and `transports` (context alias) to `sap:carries` / `carries`. SPARQL/Cypher queries that traverse the relation must update accordingly.
+- **Excel/CSV ingestion fixtures:** rename the `transports` column on the `integration` sheet to `carries`. Cell values (DataObject ids) are unchanged.
+- **Downstream consumers (federation runtime):** the runtime mapper allowlist must accept `carries` as the Integration edge column with target class `DataObject`. See `sap-ontology-runtime` v0.3.0.
+
+### Note for adopters
+- This is a breaking schema rename. Any v0.1–v0.2 instance data using `sap:transports` will fail SHACL validation under v0.3.0 because the property is no longer registered. Migrate before upgrading.
+- The conceptual model is unchanged: an `Integration`'s payload has always been a `DataObject` (per §3.1 architecture relations). Only the property name moved.
+
+### Provenance of this release
+The rename was triggered by a federation-runtime build (sap-ontology-runtime v0.3.0) that surfaced a mapper bug where `Integration.transports` resolved to the `Transport` class instead of `DataObject`. The bug was a direct consequence of the spelling collision between the property and the class. Fixing only the mapper would have left the trap in place; renaming the property removes the ambiguity at the model level.
+
 ## [0.2.0] — 2026-04-27
 
 ### Added
