@@ -55,3 +55,13 @@
 | `sap:validates` | TestCase → Change \| Configuration \| Activity | Test coverage |
 | `sap:inScenario` | (any domain instance) → Scenario | State scoping |
 | `sap:hasProvenance` | (any domain instance) → Provenance | Source accountability |
+
+## Provenance lineage (v0.4.0)
+
+Append-only edges between Provenance records. Never update or delete a Provenance — chain a new one via `supersedes` instead.
+
+| Relation | From → To | Meaning |
+|---|---|---|
+| `sap:supersedes` | Provenance → Provenance | Prior assertion replaced by this one (append-only history) |
+| `sap:supersededBy` | Provenance → Provenance | Inverse of `supersedes`; populated for traversal convenience |
+| `sap:referenceProvenance` | Provenance → Provenance | Pointer to the reference-baseline Provenance being confirmed, overridden, or extended (paired with `relationshipToReference`) |

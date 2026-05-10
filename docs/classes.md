@@ -2,13 +2,29 @@
 
 For machine-readable definitions see `schema/*.jsonld`. For the full property list per class, read the schema files directly — this page lists classes only.
 
-## Notable datatype properties (v0.2.0)
+## Notable datatype properties (v0.4.0)
 
 | Property | Domain | Range | Purpose |
 |---|---|---|---|
 | `sap:transactionCode` | `sap:Activity` | `xsd:string` | Canonical SAP T-code that executes the Activity (e.g., `VA01`). Constrained by `sh:pattern` to `^[A-Z][A-Z0-9_./-]+$`. |
 | `sap:configurationTransaction` | `sap:Configuration` | `xsd:string` | Canonical SPRO/IMG transaction maintaining the Configuration (e.g., `VOV8`, `V/08`). Same regex as `transactionCode`. |
 | `sap:decisionRule` | `sap:Decision` | `xsd:string` | Branching rule expression (required as of v0.2.0). |
+
+## Provenance properties (v0.4.0)
+
+The `sap:Provenance` class carries 30+ optional datatype/object properties, grouped by concern. See `schema/provenance.jsonld` for full definitions and `shapes/provenance.shacl.ttl` for SHACL constraints (including the three SPARQL invariants enforced in v0.4).
+
+| Concern | Properties |
+|---|---|
+| Source linkage | `sourceSystem`, `sourceUri`, `sourceChunkId`, `sourceDocType`, `sourcePage`, `sourceSpan` |
+| Identity & temporal | `assertedBy`, `assertedRole`, `assertedAt`, `extractedAt`, `reviewedAt`, `recordedAt` |
+| Bitemporal validity | `validFrom`, `validTo` (when the fact is true in the world; pair with `recordedAt` for graph transaction time) |
+| Reliability | `trustLevel` (authoritative · verified · asserted · inferred · draft · extracted · reviewed · confirmed · audited), `confidence`, `method`, `extractorModel`, `promptVersion` |
+| Lineage (append-only) | `supersedes`, `supersededBy`, `relationshipToReference` (confirms / overrides / extends), `referenceProvenance`, `overrideReason` |
+| Phase & tenancy | `baselinePhase` (reference / client-transition / client-update), `clientTenant` |
+| Change lifecycle (AMS) | `changeStatus` (planned · in-progress · in-integration-test · in-uat · released-prod · rolled-back · rejected), `statusEnteredAt`, `statusExitedAt`, `externalChangeId`, `approvalEvidenceUri` |
+
+SPARQL invariants (v0.4): `audited` trustLevel requires `approvalEvidenceUri`; `relationshipToReference = overrides` requires `overrideReason`; `method = LLM-extracted` (or `LLM-extraction`) requires `extractorModel`.
 
 ## Architecture
 | Class | Purpose |
@@ -53,5 +69,5 @@ For machine-readable definitions see `schema/*.jsonld`. For the full property li
 ## Foundation
 | Class | Purpose |
 |---|---|
-| `sap:Provenance` | Required on every instance — where the claim came from |
+| `sap:Provenance` | Required on every instance — where the claim came from, when it is true (bitemporal), how trustworthy it is, what it supersedes, and (for Change-bearing assertions) its AMS lifecycle status. See "Provenance properties" above. |
 | `sap:DomainInstance` | Abstract marker — every concrete domain class subclasses this |

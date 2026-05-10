@@ -17,7 +17,7 @@ SAP landscapes carry decades of tribal knowledge locked in spreadsheets and cons
 
 ## Scope boundaries
 
-**In scope (this repository, v0.2.0):** Upper model — classes, relations, datatype properties, SHACL constraints, canonical examples. Technology-independent. CC-BY-SA 4.0.
+**In scope (this repository, v0.4.0):** Upper model — classes, relations, datatype properties, SHACL constraints, canonical examples. Technology-independent. CC-BY-SA 4.0.
 
 **In scope (separate proprietary `sap-ontology-runtime` repository):** Federation runtime, Excel/CSV ingestion, mapper configurations, per-tenant Neo4j loading, scenario fork/mutate/promote operations. Pins this schema repository as a dependency.
 
@@ -25,7 +25,7 @@ SAP landscapes carry decades of tribal knowledge locked in spreadsheets and cons
 
 ## Schema ↔ runtime feedback loop
 
-The schema repository is the stable, versioned vocabulary. The runtime is where the schema meets real client data, and where most findings surface — for example, v0.2.0 added `sap:transactionCode` and `sap:configurationTransaction` because the Excel ingestion pilot needed dedicated columns for the executable T-code of an Activity and the SPRO transaction of a Configuration. Those findings flow upstream as MINOR or PATCH releases here, then runtime bumps its pin. Schema-first, runtime-driven.
+The schema repository is the stable, versioned vocabulary. The runtime is where the schema meets real client data, and where most findings surface — for example, v0.2.0 added `sap:transactionCode` and `sap:configurationTransaction` because the Excel ingestion pilot needed dedicated columns for the executable T-code of an Activity and the SPRO transaction of a Configuration. Those findings flow upstream as MINOR or PATCH releases here, then runtime bumps its pin. Schema-first, runtime-driven. v0.4.0 extended `sap:Provenance` with bitemporal validity (`validFrom` / `validTo` vs. `recordedAt`), append-only lineage (`supersedes` / `supersededBy` / `referenceProvenance`), AMS change-lifecycle status fields, and extractor reproducibility metadata (`extractorModel`, `promptVersion`) — driven by the AMS-on-graph and per-row provenance ingestion pilots in the runtime.
 
 ## Governance
 

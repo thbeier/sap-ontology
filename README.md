@@ -2,7 +2,7 @@
 
 A technology-independent, Deloitte-curated semantic model for reasoning across SAP **Architecture × Business Process × Implementation / Change**, with Organization and Scenario as cross-cutting dimensions.
 
-**Status:** v0.2.0 — upper model + SHACL shapes + canonical examples. The companion [federation runtime](#runtime-companion) (Excel/CSV ingestion → Neo4j) lives in a separate proprietary repository.
+**Status:** v0.4.0 — upper model + SHACL shapes + canonical examples (v0.4 extends `sap:Provenance` with bitemporal validity, append-only lineage via `supersedes`/`supersededBy`/`referenceProvenance`, change-lifecycle status, and extractor reproducibility metadata; v0.3 renamed `sap:transports` → `sap:carries`). The companion [federation runtime](#runtime-companion) (Excel/CSV ingestion → Neo4j) lives in a separate proprietary repository.
 **License:** Upper model, SHACL shapes, and examples are released under [CC-BY-SA 4.0](LICENSE). Mapper configurations and federation runtime are Deloitte proprietary.
 
 ## What's here

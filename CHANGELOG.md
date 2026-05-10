@@ -2,6 +2,33 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.4.0] — 2026-05-10
+
+### Added
+- **`sap:Provenance` extended with 26 optional properties** in five concerns:
+  - **Source linkage:** `sourceChunkId`, `sourceDocType`, `sourcePage`, `sourceSpan` — bridge graph to vector store and pinpoint the source span.
+  - **Identity & temporal:** `assertedRole`, `extractedAt`, `reviewedAt`, `recordedAt` — separate extraction time, review time, and graph transaction time from the canonical assertion timestamp.
+  - **Bitemporal validity:** `validFrom`, `validTo` — when the asserted fact is true in the business world, paired with `recordedAt` (graph transaction time).
+  - **Reliability:** `confidence` (`xsd:decimal` in `[0.0, 1.0]`), `extractorModel`, `promptVersion` — reproducibility for LLM-driven extractions.
+  - **Lineage (append-only):** `supersedes`, `supersededBy`, `relationshipToReference` (`confirms` / `overrides` / `extends`), `referenceProvenance`, `overrideReason` — chain new assertions on top of prior ones; never update or delete a Provenance.
+  - **Phase & tenancy:** `baselinePhase` (`reference` / `client-transition` / `client-update`), `clientTenant`.
+  - **Change lifecycle (AMS):** `changeStatus` (`planned` · `in-progress` · `in-integration-test` · `in-uat` · `released-prod` · `rolled-back` · `rejected`), `statusEnteredAt`, `statusExitedAt`, `externalChangeId`, `approvalEvidenceUri` — anchor every Change transition to its operational source of truth.
+- **Three SHACL/SPARQL invariants** on `sap:ProvenanceShape`:
+  1. `trustLevel = audited` ⇒ `approvalEvidenceUri` must be present.
+  2. `relationshipToReference = overrides` ⇒ `overrideReason` must be present.
+  3. `method = LLM-extracted` (or `LLM-extraction`) ⇒ `extractorModel` must be present.
+
+### Changed
+- **`sap:trustLevel`** enum extended with `extracted`, `reviewed`, `confirmed`, `audited` (in addition to the legacy `authoritative` / `verified` / `asserted` / `inferred` / `draft`).
+- **`sap:method`** enum extended with `SPRO-export`, `config-export`, `change-record`, `manual-review`, `LLM-extraction` (alongside `manual` / `ETL` / `LLM-extracted`).
+
+### Note for adopters
+- Backwards-compatible with v0.3.0. All v0.3 Provenance instances remain valid — every new property is optional and the new SHACL invariants only fire when the triggering value is present.
+- For the runtime: the new ObjectProperty edges (`supersedes`, `supersededBy`, `referenceProvenance`) target `sap:Provenance` itself. Mappers ingesting per-row Provenance must allowlist these as Provenance edges (the runtime mapper was updated in `sap-ontology-runtime` v0.4.0 to skip auto-attaching `inScenario` / `hasProvenance` to Provenance rows themselves).
+
+### Provenance of this release
+Driven by two pilots in the federation runtime: (a) AMS-on-graph — capturing change-lifecycle transitions as Provenance records so blast-radius queries see real change status, and (b) per-row provenance ingestion — letting Excel authors override the fixture-default Provenance row-by-row, with cited override reasons traceable back to the reference baseline. Both pilots needed bitemporal time, append-only lineage, and reproducibility metadata that v0.3 didn't carry.
+
 ## [0.3.0] — 2026-05-01
 
 ### Changed (BREAKING)

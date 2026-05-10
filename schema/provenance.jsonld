@@ -58,9 +58,8 @@
       "rdfs:comment": "Graph transaction time — when the graph learned about the assertion. Bitemporal pair with validFrom/validTo." },
 
     { "@id": "sap:validFrom", "@type": "owl:DatatypeProperty",
-      "rdfs:domain": { "@id": "sap:Provenance" },
       "rdfs:range":  { "@id": "xsd:dateTime" },
-      "rdfs:comment": "When the asserted fact becomes true in the business world. Aligned to xsd:dateTime to match Scenario.validFrom." },
+      "rdfs:comment": "Bitemporal validity start on a Provenance: when the asserted fact becomes true in the business world. The same IRI is also used on sap:Scenario for the lifecycle start of a named state — the property is intentionally polymorphic, so no rdfs:domain is declared. Per-class constraints live in sap:ProvenanceShape and sap:ScenarioShape." },
     { "@id": "sap:validTo", "@type": "owl:DatatypeProperty",
       "rdfs:domain": { "@id": "sap:Provenance" },
       "rdfs:range":  { "@id": "xsd:dateTime" },
