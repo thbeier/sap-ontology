@@ -5,6 +5,8 @@
 sap:ProvenanceShape
     a sh:NodeShape ;
     sh:targetClass sap:Provenance ;
+
+    # --- Required core fields (unchanged from v0.3) ----------------------
     sh:property [
         sh:path sap:sourceSystem ;
         sh:datatype xsd:string ;
@@ -20,14 +22,151 @@ sap:ProvenanceShape
     sh:property [
         sh:path sap:trustLevel ;
         sh:datatype xsd:string ;
-        sh:in ( "authoritative" "verified" "asserted" "inferred" "draft" ) ;
+        sh:in (
+            "authoritative" "verified" "asserted" "inferred" "draft"
+            "extracted" "reviewed" "confirmed" "audited"
+        ) ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
         sh:path sap:method ;
         sh:datatype xsd:string ;
-        sh:in ( "manual" "ETL" "LLM-extracted" ) ;
+        sh:in (
+            "manual" "ETL" "LLM-extracted" "LLM-extraction"
+            "SPRO-export" "config-export" "change-record" "manual-review"
+        ) ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+    ] ;
+
+    # --- Source / chunk linkage (optional, all maxCount 1) --------------
+    sh:property [ sh:path sap:sourceUri ;        sh:datatype xsd:anyURI ;  sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:sourceChunkId ;    sh:datatype xsd:string ;  sh:maxCount 1 ] ;
+    sh:property [
+        sh:path sap:sourceDocType ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "process-doc" "functional-spec" "technical-spec" "test-case"
+            "training" "runbook" "spro-export" "config-export" "change-record"
+        ) ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [ sh:path sap:sourcePage ;       sh:datatype xsd:integer ; sh:maxCount 1 ;
+                  sh:minInclusive 1 ] ;
+    sh:property [ sh:path sap:sourceSpan ;       sh:datatype xsd:string ;  sh:maxCount 1 ;
+                  sh:pattern "^[0-9]+-[0-9]+$" ] ;
+
+    # --- Identity / role / temporal -------------------------------------
+    sh:property [ sh:path sap:assertedBy ;       sh:datatype xsd:string ;  sh:maxCount 1 ] ;
+    sh:property [
+        sh:path sap:assertedRole ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "requester" "approver" "tester-it" "tester-uat"
+            "release-manager" "rollback-coordinator" "reviewer" "auditor"
+        ) ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [ sh:path sap:extractedAt ;      sh:datatype xsd:dateTime ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:reviewedAt ;       sh:datatype xsd:dateTime ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:recordedAt ;       sh:datatype xsd:dateTime ; sh:maxCount 1 ] ;
+
+    # --- Bitemporal validity --------------------------------------------
+    sh:property [ sh:path sap:validFrom ;        sh:datatype xsd:dateTime ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:validTo ;          sh:datatype xsd:dateTime ; sh:maxCount 1 ] ;
+
+    # --- Reliability / reproducibility ----------------------------------
+    sh:property [ sh:path sap:confidence ;       sh:datatype xsd:decimal ; sh:maxCount 1 ;
+                  sh:minInclusive 0.0 ; sh:maxInclusive 1.0 ] ;
+    sh:property [ sh:path sap:extractorModel ;   sh:datatype xsd:string ;  sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:promptVersion ;    sh:datatype xsd:string ;  sh:maxCount 1 ] ;
+
+    # --- Lineage --------------------------------------------------------
+    sh:property [ sh:path sap:supersedes ;       sh:class sap:Provenance ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:supersededBy ;     sh:class sap:Provenance ; sh:maxCount 1 ] ;
+    sh:property [
+        sh:path sap:relationshipToReference ;
+        sh:datatype xsd:string ;
+        sh:in ( "confirms" "overrides" "extends" ) ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [ sh:path sap:referenceProvenance ; sh:class sap:Provenance ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:overrideReason ;   sh:datatype xsd:string ;  sh:maxCount 1 ] ;
+
+    # --- Baseline phase / tenancy ---------------------------------------
+    sh:property [
+        sh:path sap:baselinePhase ;
+        sh:datatype xsd:string ;
+        sh:in ( "reference" "client-transition" "client-update" ) ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [ sh:path sap:clientTenant ;     sh:datatype xsd:string ;  sh:maxCount 1 ] ;
+
+    # --- Change-lifecycle context ---------------------------------------
+    sh:property [
+        sh:path sap:changeStatus ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "planned" "in-progress" "in-integration-test"
+            "in-uat" "released-prod" "rolled-back" "rejected"
+        ) ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [ sh:path sap:statusEnteredAt ;  sh:datatype xsd:dateTime ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:statusExitedAt ;   sh:datatype xsd:dateTime ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:externalChangeId ; sh:datatype xsd:string ;  sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:approvalEvidenceUri ; sh:datatype xsd:anyURI ; sh:maxCount 1 ] .
+
+# --- Cross-property invariants ------------------------------------------
+
+# If trustLevel is "audited", approvalEvidenceUri MUST be present.
+sap:AuditedRequiresEvidenceShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Provenance ;
+    sh:sparql [
+        sh:message "Provenance with trustLevel='audited' must have approvalEvidenceUri." ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "sap" ; sh:namespace "https://thbeier.github.io/sap-ontology/vocab#"^^xsd:anyURI ] ;
+        ] ;
+        sh:select """
+            SELECT $this WHERE {
+              $this sap:trustLevel \"audited\" .
+              FILTER NOT EXISTS { $this sap:approvalEvidenceUri ?u . }
+            }
+        """ ;
+    ] .
+
+# If relationshipToReference is "overrides", overrideReason MUST be present.
+sap:OverrideRequiresReasonShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Provenance ;
+    sh:sparql [
+        sh:message "Provenance that overrides reference baseline must carry overrideReason." ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "sap" ; sh:namespace "https://thbeier.github.io/sap-ontology/vocab#"^^xsd:anyURI ] ;
+        ] ;
+        sh:select """
+            SELECT $this WHERE {
+              $this sap:relationshipToReference \"overrides\" .
+              FILTER NOT EXISTS { $this sap:overrideReason ?r . }
+            }
+        """ ;
+    ] .
+
+# If method is "LLM-extracted" or "LLM-extraction", extractorModel MUST be present.
+sap:LLMRequiresModelShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Provenance ;
+    sh:sparql [
+        sh:message "LLM-extracted Provenance must carry extractorModel for reproducibility." ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "sap" ; sh:namespace "https://thbeier.github.io/sap-ontology/vocab#"^^xsd:anyURI ] ;
+        ] ;
+        sh:select """
+            SELECT $this WHERE {
+              { $this sap:method \"LLM-extracted\" . } UNION { $this sap:method \"LLM-extraction\" . }
+              FILTER NOT EXISTS { $this sap:extractorModel ?m . }
+            }
+        """ ;
     ] .
