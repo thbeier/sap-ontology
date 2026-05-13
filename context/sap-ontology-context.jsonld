@@ -79,6 +79,13 @@
     "dependsOn":     { "@id": "sap:dependsOn",     "@type": "@id" },
     "partOf":        { "@id": "sap:partOf",        "@type": "@id" },
     "occupiedBy":    { "@id": "sap:occupiedBy",    "@type": "@id" },
-    "memberOf":      { "@id": "sap:memberOf",      "@type": "@id" }
+    "memberOf":      { "@id": "sap:memberOf",      "@type": "@id" },
+
+    "systemRole":    { "@id": "sap:systemRole",    "@type": "xsd:string" },
+    "importedAt":    { "@id": "sap:importedAt",    "@type": "xsd:dateTime" },
+    "importedBy":    { "@id": "sap:importedBy",    "@type": "xsd:string" },
+    "importResult":  { "@id": "sap:importResult",  "@type": "xsd:string" },
+    "importedInto":  { "@id": "sap:importedInto",  "@type": "@id" },
+    "targets":       { "@id": "sap:targets",       "@type": "@id" }
   }
 }

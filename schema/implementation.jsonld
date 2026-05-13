@@ -51,6 +51,34 @@
       "rdfs:range":  { "@id": "sap:Transport" } },
     { "@id": "sap:resultsIn",   "@type": "owl:ObjectProperty",
       "rdfs:domain": { "@id": "sap:Incident" },
-      "rdfs:range":  { "@id": "sap:Change" } }
+      "rdfs:range":  { "@id": "sap:Change" } },
+
+    { "@id": "sap:TransportImport", "@type": "owl:Class",
+      "rdfs:label": "Transport Import",
+      "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
+      "rdfs:comment": "A discrete STMS / Cloud ALM import event of one Transport into one System. Reified so the landscape progression of a Change (DEV→QA→PRD) is queryable, auditable, and replayable. Multiple TransportImports may exist per (Transport, System) pair when re-imports happen." },
+
+    { "@id": "sap:importedAt",   "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:TransportImport" },
+      "rdfs:range":  { "@id": "xsd:dateTime" } },
+    { "@id": "sap:importedBy",   "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:TransportImport" },
+      "rdfs:range":  { "@id": "xsd:string" } },
+    { "@id": "sap:importResult", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:TransportImport" },
+      "rdfs:range":  { "@id": "xsd:string" },
+      "rdfs:label":  "Import Result",
+      "rdfs:comment": "Outcome of the STMS import: success, failed, in-progress, rolled-back." },
+
+    { "@id": "sap:importedInto", "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:Transport" },
+      "rdfs:range":  { "@id": "sap:TransportImport" },
+      "rdfs:label":  "Imported Into",
+      "rdfs:comment": "Transport→TransportImport: the discrete import events of a transport. A transport with no importedInto edges has been released but not yet imported anywhere." },
+    { "@id": "sap:targets",      "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:TransportImport" },
+      "rdfs:range":  { "@id": "sap:System" },
+      "rdfs:label":  "Targets",
+      "rdfs:comment": "TransportImport→System: which system received this transport." }
   ]
 }

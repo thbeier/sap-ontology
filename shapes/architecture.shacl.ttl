@@ -26,6 +26,17 @@ sap:TechnologyBuildingBlockShape
     sh:property [ sh:path sap:deployment ; sh:datatype xsd:string ;
         sh:in ( "on-prem" "cloud" "hybrid" ) ] .
 
+sap:SystemShape
+    a sh:NodeShape ;
+    sh:targetClass sap:System ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:name ;       sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:systemRole ; sh:datatype xsd:string ;
+        sh:in ( "DEV" "QA" "PRD" "sandbox" "training" ) ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "System.systemRole must be one of DEV, QA, PRD, sandbox, training." ] ;
+    sh:property [ sh:path sap:lifecycleState ; sh:datatype xsd:string ;
+        sh:in ( "planned" "live" "sunset" "retired" ) ; sh:minCount 1 ; sh:maxCount 1 ] .
+
 sap:DataObjectShape
     a sh:NodeShape ;
     sh:targetClass sap:DataObject ;

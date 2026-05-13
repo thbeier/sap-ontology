@@ -22,6 +22,12 @@ sap:ChangeShape
     sh:property [ sh:path sap:name ;   sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path sap:status ; sh:datatype xsd:string ;
         sh:in ( "draft" "requested" "approved" "in-progress" "deployed" "rejected" "rolled-back" ) ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:changeStatus ; sh:datatype xsd:string ;
+        sh:in ( "draft" "in-development" "unit-tested" "released-to-qa"
+                "qa-passed" "released-to-prd" "imported-to-prd" "baseline-merged"
+                "rejected" "rolled-back" ) ;
+        sh:maxCount 1 ;
+        sh:message "changeStatus is the pinned landscape-progression enum; status remains the legacy free-form field. Set both during transition." ] ;
     sh:property [ sh:path sap:affects ; sh:class sap:Configuration ] .
 
 sap:TransportShape
@@ -30,7 +36,22 @@ sap:TransportShape
     sh:node sap:DomainInstanceShape ;
     sh:property [ sh:path sap:transportId ; sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path sap:type ;        sh:datatype xsd:string ;
-        sh:in ( "customizing" "workbench" ) ] .
+        sh:in ( "customizing" "workbench" ) ] ;
+    sh:property [ sh:path sap:importedInto ; sh:class sap:TransportImport ] .
+
+sap:TransportImportShape
+    a sh:NodeShape ;
+    sh:targetClass sap:TransportImport ;
+    sh:node sap:DomainInstanceShape ;
+    sh:property [ sh:path sap:importedAt ;   sh:datatype xsd:dateTime ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:importResult ; sh:datatype xsd:string ;
+        sh:in ( "success" "failed" "in-progress" "rolled-back" ) ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "TransportImport.importResult must be one of success, failed, in-progress, rolled-back." ] ;
+    sh:property [ sh:path sap:importedBy ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path sap:targets ;    sh:class sap:System ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Every TransportImport must target exactly one System." ] .
 
 sap:TestCaseShape
     a sh:NodeShape ;
