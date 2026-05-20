@@ -40,6 +40,18 @@ def pytest_generate_tests(metafunc):
 def test_example_conforms(example_path, schema_dir, shapes_dir, examples_dir):
     data = _full_data_graph(schema_dir, examples_dir, example_path)
     shapes = _full_shape_graph(shapes_dir)
-    conforms, _, report = validate(data, shacl_graph=shapes,
-                                   inference="rdfs", abort_on_first=False)
-    assert conforms, f"{example_path.name} fails SHACL:\n{report}"
+    conforms, results_graph, report = validate(
+        data, shacl_graph=shapes, inference="rdfs", abort_on_first=False
+    )
+    # Treat sh:Warning and sh:Info as advisory — they describe avoidable
+    # data-quality issues (e.g. missing observedInSystem on environment-bound
+    # entities) but should not block conformance. Only sh:Violation fails.
+    if not conforms:
+        from rdflib import Namespace, URIRef
+        SH = Namespace("http://www.w3.org/ns/shacl#")
+        violations = list(results_graph.subjects(
+            predicate=SH.resultSeverity, object=URIRef(SH.Violation)
+        ))
+        assert not violations, (
+            f"{example_path.name} fails SHACL with violations:\n{report}"
+        )

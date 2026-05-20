@@ -14,7 +14,7 @@ sap:ScenarioShape
     sh:property [
         sh:path sap:scenarioType ;
         sh:datatype xsd:string ;
-        sh:in ( "as-is" "to-be" "variant" ) ;
+        sh:in ( "as-is" "to-be" "variant" "best-practice" ) ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -23,5 +23,10 @@ sap:ScenarioShape
         sh:datatype xsd:string ;
         sh:in ( "draft" "active" "locked" "superseded" ) ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sap:scenarioCode ;
+        sh:datatype xsd:string ;
         sh:maxCount 1 ;
     ] .

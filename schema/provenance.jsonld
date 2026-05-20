@@ -135,6 +135,12 @@
     { "@id": "sap:approvalEvidenceUri", "@type": "owl:DatatypeProperty",
       "rdfs:domain": { "@id": "sap:Provenance" },
       "rdfs:range":  { "@id": "xsd:anyURI" },
-      "rdfs:comment": "Pointer to evidence supporting the assertion (signed approval, test execution log, deployment record). Required for audited trustLevel." }
+      "rdfs:comment": "Pointer to evidence supporting the assertion (signed approval, test execution log, deployment record). Required for audited trustLevel." },
+
+    { "@id": "sap:observedInSystem", "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:Provenance" },
+      "rdfs:range":  { "@id": "sap:System" },
+      "rdfs:label":  "Observed In System",
+      "rdfs:comment": "The runtime System this fact applies to, when the asserted entity is environment-bound (e.g. a TransportImport into a specific QA system, an Incident raised against a specific PRD system, a Configuration read from a specific DEV system). Absent for design-time assertions that apply across the landscape (modelled Processes, Requirements, TestCases). Carries the environment dimension that turns the graph into a debuggable model of the running landscape." }
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:system-s4-prd-001",
+  "@type": ["sap:System", "sap:DomainInstance"],
+  "sap:name": "S4P — S/4HANA Production",
+  "sap:systemRole": "PRD",
+  "sap:vendor": "SAP",
+  "sap:version": "S/4HANA 2023 FPS02",
+  "sap:deployment": "cloud",
+  "sap:lifecycleState": "live",
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

@@ -116,7 +116,10 @@ sap:ProvenanceShape
     sh:property [ sh:path sap:statusEnteredAt ;  sh:datatype xsd:dateTime ; sh:maxCount 1 ] ;
     sh:property [ sh:path sap:statusExitedAt ;   sh:datatype xsd:dateTime ; sh:maxCount 1 ] ;
     sh:property [ sh:path sap:externalChangeId ; sh:datatype xsd:string ;  sh:maxCount 1 ] ;
-    sh:property [ sh:path sap:approvalEvidenceUri ; sh:datatype xsd:anyURI ; sh:maxCount 1 ] .
+    sh:property [ sh:path sap:approvalEvidenceUri ; sh:datatype xsd:anyURI ; sh:maxCount 1 ] ;
+
+    # --- Environment binding (v0.6) -------------------------------------
+    sh:property [ sh:path sap:observedInSystem ; sh:class sap:System ; sh:maxCount 1 ] .
 
 # --- Cross-property invariants ------------------------------------------
 
@@ -150,6 +153,26 @@ sap:OverrideRequiresReasonShape
             SELECT $this WHERE {
               $this sap:relationshipToReference \"overrides\" .
               FILTER NOT EXISTS { $this sap:overrideReason ?r . }
+            }
+        """ ;
+    ] .
+
+# Environment-bound entities (TransportImport, Incident) SHOULD carry observedInSystem
+# on their attached Provenance. Warning, not violation, so older fixtures keep loading
+# while we backfill — but it surfaces dirty extractors at validation time.
+sap:EnvironmentBoundProvenanceShape
+    a sh:NodeShape ;
+    sh:targetClass sap:TransportImport, sap:Incident ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Environment-bound entity (TransportImport / Incident) has Provenance without observedInSystem — environment dimension missing for troubleshooting queries." ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "sap" ; sh:namespace "https://thbeier.github.io/sap-ontology/vocab#"^^xsd:anyURI ] ;
+        ] ;
+        sh:select """
+            SELECT $this WHERE {
+              $this sap:hasProvenance ?p .
+              FILTER NOT EXISTS { ?p sap:observedInSystem ?s . }
             }
         """ ;
     ] .

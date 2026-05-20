@@ -86,6 +86,9 @@
     "importedBy":    { "@id": "sap:importedBy",    "@type": "xsd:string" },
     "importResult":  { "@id": "sap:importResult",  "@type": "xsd:string" },
     "importedInto":  { "@id": "sap:importedInto",  "@type": "@id" },
-    "targets":       { "@id": "sap:targets",       "@type": "@id" }
+    "targets":       { "@id": "sap:targets",       "@type": "@id" },
+
+    "scenarioCode":      { "@id": "sap:scenarioCode",      "@type": "xsd:string" },
+    "observedInSystem":  { "@id": "sap:observedInSystem",  "@type": "@id" }
   }
 }

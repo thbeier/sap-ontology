@@ -1,0 +1,12 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:transport-import-chf-01-qa",
+  "@type": ["sap:TransportImport", "sap:DomainInstance"],
+  "sap:name": "Import of DEVK900123 into QAS",
+  "importedAt": "2026-04-12T08:15:00Z",
+  "sap:importedBy": "release-mgr@example.com",
+  "sap:importResult": "success",
+  "sap:targets": { "@id": "sap:system-s4-prd-001" },
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

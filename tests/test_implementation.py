@@ -34,6 +34,15 @@ def impl_data_and_shapes(schema_dir, shapes_dir, examples_dir):
 
 def test_implementation_examples_conform(impl_data_and_shapes):
     data, shapes = impl_data_and_shapes
-    conforms, _, report = validate(data, shacl_graph=shapes,
-                                   inference="rdfs", abort_on_first=False)
-    assert conforms, f"Implementation examples must validate:\n{report}"
+    conforms, results_graph, report = validate(
+        data, shacl_graph=shapes, inference="rdfs", abort_on_first=False
+    )
+    if not conforms:
+        from rdflib import Namespace, URIRef
+        SH = Namespace("http://www.w3.org/ns/shacl#")
+        violations = list(results_graph.subjects(
+            predicate=SH.resultSeverity, object=URIRef(SH.Violation)
+        ))
+        assert not violations, (
+            f"Implementation examples must validate:\n{report}"
+        )

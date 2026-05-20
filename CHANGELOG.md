@@ -2,6 +2,32 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.6.0] — 2026-05-19
+
+### Added
+- **`scenarioType` enum extended with `best-practice`.** Identifies an SAP-published reference Scenario (Solution Process, e.g. `J45`, `BD9`) that customer Processes may map to via the existing multi-valued `sap:inScenario` edge. Best-practice scenarios are loaded read-only and locked (`lifecycleState=locked`). Existing scenarios (`as-is`, `to-be`, `variant`) are unaffected — this is an additive enum extension.
+- **`sap:scenarioCode` (optional string on `Scenario`).** External identifier for a Scenario. For best-practice scenarios this carries the SAP Solution Process code (`J45`); for customer scenarios it may carry an internal code or be null. Queryable directly without IRI parsing.
+- **`sap:observedInSystem` (optional ObjectProperty on `Provenance`, range `sap:System`).** The runtime System an environment-bound fact applies to. Populated for `TransportImport` (the target system of the import), `Incident` (the system the incident was raised against), and future SPRO-extracted `Configuration` instances. Absent for design-time facts (modelled Processes, Requirements, TestCases) that apply across the landscape. This is the dimension that turns the graph into a debuggable model of the running landscape — *"what is actually live in PRD right now?"*
+- **`sap:EnvironmentBoundProvenanceShape` (SHACL warning).** Targets `TransportImport` and `Incident`; warns when their attached `Provenance` is missing `observedInSystem`. Warning, not violation — older fixtures keep loading while extractors backfill, but dirty extractors are surfaced at validation time.
+
+### Rationale
+- Modelled to support the Signavio + Cloud ALM integration spec (runtime `docs/design/03-signavio-cloud-alm-integration.md`). The first user is the customer-process / SAP-Best-Practice classification (M:N via `inScenario`) and the PRD-incident blast-radius query.
+- Deliberately re-used `sap:Scenario` rather than introducing a `BestPracticeScenario` class — `Scenario` already supports multi-valued `inScenario` membership, `lifecycleState=locked`, and the existing scenario operations (`fork`, `mutate`, `promote`, `branch`, `diff`) which now work on best-practice scenarios for free.
+
+### Migration
+- Additive only. Existing fixtures continue to validate. Runtimes that consume v0.6.0 may emit `scenarioCode` and `observedInSystem`; runtimes pinned to v0.5.0 ignore them.
+
+## [0.5.0] — 2026-05-13
+
+### Added
+- **`sap:System` class** (subclass of `sap:ApplicationComponent`) for concrete runtime SAP systems, distinguished by `sap:systemRole` (`DEV`/`QA`/`PRD`/`sandbox`/`training`). Enables landscape-topology queries; Transports are imported INTO Systems.
+- **`sap:TransportImport` class** reifying each STMS / Cloud ALM import as a discrete, queryable event. Edges: `Transport -[importedInto]-> TransportImport -[targets]-> System`. Carries `importedAt`, `importedBy`, `importResult` (`success` / `failed` / `in-progress` / `rolled-back`). Multiple TransportImports may exist per (Transport, System) pair when re-imports happen.
+- **Pinned `sap:changeStatus` enum** on `Change`/`Provenance`: `draft → in-development → unit-tested → released-to-qa → qa-passed → released-to-prd → imported-to-prd → baseline-merged`, plus `rejected` and `rolled-back`. Legacy `sap:status` retained for back-compat.
+- New context terms: `systemRole`, `importedAt`, `importedBy`, `importResult`, `importedInto`, `targets`.
+
+### Rationale
+- The v0.4 Change/Transport model couldn't express *which system received a transport at what time* — the v0.5 reification makes that queryable, auditable, and replayable.
+
 ## [0.4.0] — 2026-05-10
 
 ### Added
