@@ -2,6 +2,24 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.7.0] — 2026-05-20
+
+### Added
+- **`sap:RicefwObject` class** (subclass of `sap:ApplicationComponent`) for customer-developed extensions to the standard SAP product: Reports, Interfaces, Conversions, Enhancements, Forms, Workflows. Closes a long-standing gap — the runtime's design docs referenced RICEFW objects (~20 mentions across specs 01b and 02 as a corpus class, anchor type, graph entity, and remediation target) but the upper model had no class for them, forcing every RICEFW reference into `ApplicationComponent` and losing the distinction between standard SAP software and customer-built extensions.
+- **`sap:ricefwType`** (pinned enum on `RicefwObject`): `Report` / `Interface` / `Conversion` / `Enhancement` / `Form` / `Workflow`. Single property + enum rather than six subclasses — the classification matters for routing (forms and interfaces have different debug paths) but the structural model is identical across all six.
+- **`sap:objectId`** (required string on `RicefwObject`): the Z\*/Y\*/customer-namespace identifier (e.g. `ZMM_TOL_CHECK`). Used by gCTS / Git path resolution and ATC / Code Inspector lookups during incident triage and remediation drafting.
+- **`sap:enhances`** (ObjectProperty `RicefwObject → ApplicationComponent`): the standard SAP component or object being extended (BAdI host, enhancement spot, user exit, standard report being copied-and-modified). Required for Reports/Interfaces/Conversions that replace standard behaviour; optional for greenfield Forms/Workflows.
+- **`sap:realizesActivity`** (ObjectProperty `RicefwObject → Activity`, multi-valued): the business action this customer object supports. The edge that powers `graph.ricefw_for_activity` blast-radius queries in spec 02.
+- **`sap:RicefwObjectShape`** (SHACL): enforces required `name`, `objectId`, `ricefwType` (pinned enum), `lifecycleState` (inherited from ApplicationComponent's enum: `planned` / `live` / `sunset` / `retired`), and class-typed `enhances` / `realizesActivity` edges.
+- Example fixture `examples/implementation/ricefw-zmm-tol-check.jsonld` — the `ZMM_TOL_CHECK` enhancement cited in design spec 02 §3.1.
+
+### Rationale
+- RICEFW IS deployed software — just customer-built — so subclassing `ApplicationComponent` gives it `lifecycleState`, `vendor='customer'`, `deployment`, `tier`, `hostedOn`, `dependsOn` for free.
+- The model handles customizing-with-coupling (a BAdI implementation that reads a Z-table) naturally via the existing `dependsOn` edge to `Configuration` — no special case needed.
+
+### Migration
+- Additive only. Existing fixtures continue to validate. Runtimes pinned to v0.6.0 ignore the new class and properties. Module baselines that should carry RICEFW objects (custom forms, ABAP enhancements) can be backfilled incrementally without invalidating existing data.
+
 ## [0.6.0] — 2026-05-19
 
 ### Added

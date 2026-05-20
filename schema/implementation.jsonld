@@ -13,6 +13,10 @@
       "rdfs:subClassOf": { "@id": "sap:DomainInstance" }, "rdfs:label": "Incident" },
     { "@id": "sap:Requirement", "@type": "owl:Class",
       "rdfs:subClassOf": { "@id": "sap:DomainInstance" }, "rdfs:label": "Requirement" },
+    { "@id": "sap:RicefwObject", "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "sap:ApplicationComponent" },
+      "rdfs:label": "RICEFW Object",
+      "rdfs:comment": "Customer-developed extension to the standard SAP product: Report, Interface, Conversion, Enhancement, Form, or Workflow. Subclass of ApplicationComponent because RICEFW is deployed software — just customer-built — so it inherits lifecycleState, vendor, deployment, tier, hostedOn, dependsOn. Distinguished from a standard ApplicationComponent by sap:ricefwType and sap:objectId (the Z*/Y*/customer-namespace identifier)." },
 
     { "@id": "sap:type",          "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
     { "@id": "sap:scope",         "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
@@ -79,6 +83,27 @@
       "rdfs:domain": { "@id": "sap:TransportImport" },
       "rdfs:range":  { "@id": "sap:System" },
       "rdfs:label":  "Targets",
-      "rdfs:comment": "TransportImport→System: which system received this transport." }
+      "rdfs:comment": "TransportImport→System: which system received this transport." },
+
+    { "@id": "sap:ricefwType", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:RicefwObject" },
+      "rdfs:range":  { "@id": "xsd:string" },
+      "rdfs:label":  "RICEFW Type",
+      "rdfs:comment": "Classification of the customer-developed object: Report, Interface, Conversion, Enhancement, Form, or Workflow. Drives routing in operate workflows (forms and interfaces have different debug paths)." },
+    { "@id": "sap:objectId", "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:RicefwObject" },
+      "rdfs:range":  { "@id": "xsd:string" },
+      "rdfs:label":  "Object ID",
+      "rdfs:comment": "The ABAP/namespaced identifier of the customer object: Z* / Y* / /CUSTOMER/* name. Used by gCTS / Git path resolution and by ATC / Code Inspector lookups." },
+    { "@id": "sap:enhances", "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:RicefwObject" },
+      "rdfs:range":  { "@id": "sap:ApplicationComponent" },
+      "rdfs:label":  "Enhances",
+      "rdfs:comment": "RicefwObject→ApplicationComponent: the standard SAP component or object being extended (BAdI host, enhancement spot, user exit, standard report being copied-and-modified). Required for Reports/Interfaces/Conversions that replace standard behaviour; optional for greenfield Forms/Workflows." },
+    { "@id": "sap:realizesActivity", "@type": "owl:ObjectProperty",
+      "rdfs:domain": { "@id": "sap:RicefwObject" },
+      "rdfs:range":  { "@id": "sap:Activity" },
+      "rdfs:label":  "Realizes Activity",
+      "rdfs:comment": "RicefwObject→Activity: the business action this customer object supports. Multi-valued — a single Z-report may serve multiple Activities. This is the edge that supports `graph.ricefw_for_activity` blast-radius queries during incident triage." }
   ]
 }

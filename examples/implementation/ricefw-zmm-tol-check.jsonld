@@ -1,0 +1,16 @@
+{
+  "@context": "../../context/sap-ontology-context.jsonld",
+  "@id": "sap:ricefw-zmm-tol-check",
+  "@type": ["sap:RicefwObject", "sap:ApplicationComponent", "sap:DomainInstance"],
+  "sap:name": "Goods-Receipt Tolerance Check Enhancement",
+  "sap:objectId": "ZMM_TOL_CHECK",
+  "sap:ricefwType": "Enhancement",
+  "sap:vendor": "customer",
+  "sap:deployment": "on-prem",
+  "sap:tier": "application",
+  "sap:lifecycleState": "live",
+  "sap:enhances": { "@id": "sap:app-sd-module" },
+  "sap:realizesActivity": { "@id": "sap:activity-credit-check" },
+  "sap:inScenario": { "@id": "sap:scenario-as-is" },
+  "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
+}

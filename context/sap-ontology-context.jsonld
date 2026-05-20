@@ -89,6 +89,11 @@
     "targets":       { "@id": "sap:targets",       "@type": "@id" },
 
     "scenarioCode":      { "@id": "sap:scenarioCode",      "@type": "xsd:string" },
-    "observedInSystem":  { "@id": "sap:observedInSystem",  "@type": "@id" }
+    "observedInSystem":  { "@id": "sap:observedInSystem",  "@type": "@id" },
+
+    "ricefwType":        { "@id": "sap:ricefwType",        "@type": "xsd:string" },
+    "objectId":          { "@id": "sap:objectId",          "@type": "xsd:string" },
+    "enhances":          { "@id": "sap:enhances",          "@type": "@id" },
+    "realizesActivity":  { "@id": "sap:realizesActivity",  "@type": "@id" }
   }
 }
