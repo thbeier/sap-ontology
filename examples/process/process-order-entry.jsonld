@@ -3,6 +3,7 @@
   "@id": "sap:process-order-entry",
   "@type": ["sap:Process", "sap:DomainInstance"],
   "sap:name": "Order Entry",
+  "sap:processId": "O2C-10",
   "sap:processLevel": "L4_SubProcess",
   "sap:bpmnType": "embedded",
   "sap:contains": [

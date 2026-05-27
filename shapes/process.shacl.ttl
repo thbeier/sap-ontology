@@ -7,6 +7,13 @@ sap:ProcessShape
     sh:targetClass sap:Process ;
     sh:node sap:DomainInstanceShape ;
     sh:property [ sh:path sap:name ;         sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:processId ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:pattern "^[A-Za-z0-9][A-Za-z0-9._-]*$" ;
+        sh:severity sh:Warning ;
+        sh:message "processId is the customer-owned identity code (e.g. RtR-10-20). Required from v0.8.0; Warning until then so existing fixtures continue to load." ] ;
     sh:property [ sh:path sap:processLevel ; sh:datatype xsd:string ; sh:minCount 1 ;
         sh:message "processLevel is required. Use L1_ValueChain / L2_ProcessGroup / L3_Process / L4_SubProcess or a documented client-specific label." ;
         sh:or (
@@ -60,3 +67,25 @@ sap:BusinessDocumentShape
     sh:node sap:DomainInstanceShape ;
     sh:property [ sh:path sap:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path sap:represents ; sh:class sap:DataObject ] .
+
+# Per-graph uniqueness of sap:processId — within a tenant's Neo4j database,
+# two Process nodes must not share the same processId. Tenants are isolated
+# at the runtime level (one database per tenant), so graph-global uniqueness
+# is equivalent to per-tenant uniqueness.
+sap:ProcessIdUniqueShape
+    a sh:NodeShape ;
+    sh:targetClass sap:Process ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "processId must be unique within a tenant graph — another Process already claims this code." ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "sap" ; sh:namespace "https://thbeier.github.io/sap-ontology/vocab#"^^xsd:anyURI ]
+        ] ;
+        sh:select """
+            SELECT ?this ?other WHERE {
+                ?this  a sap:Process ; sap:processId ?id .
+                ?other a sap:Process ; sap:processId ?id .
+                FILTER (?this != ?other)
+            }
+        """
+    ] .

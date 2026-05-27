@@ -37,7 +37,7 @@ SPARQL invariants (v0.4): `audited` trustLevel requires `approvalEvidenceUri`; `
 ## Business Process
 | Class | Purpose |
 |---|---|
-| `sap:Process` | Recursive — covers L1 value chains through L4 sub-processes (see `processLevel`) |
+| `sap:Process` | Recursive — covers L1 value chains through L4 sub-processes (see `processLevel`). Identity is `sap:processId` (customer-owned code, e.g. `RtR-10-20`); SAP best-practice BP codes (J45 etc.) are M:N *classification* carried via `sap:inScenario`, not identity. |
 | `sap:Activity` | Leaf (L5) — atomic step performed by a role or system |
 | `sap:Event` | Trigger or outcome marker |
 | `sap:Decision` | Branch point with a business rule |

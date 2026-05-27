@@ -2,6 +2,19 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.7.2] — 2026-05-27
+
+### Added
+- **`sap:processId`** — customer-owned identity code for a Process (e.g. `RtR-10-20`, `O2C.4.1.3`, `MDG-BP-CR`). Closes the gap flagged in design-doc review: the federation runtime and spec 03 have been emitting `sap:processId` as a join key, but the property did not exist in the upper model — it loaded as an untyped, unconstrained literal. Now declared on `schema/process.jsonld` with `rdfs:domain: sap:Process`, bound in `context/sap-ontology-context.jsonld`, and constrained by SHACL.
+- **`sap:ProcessShape.processId` constraints** in `shapes/process.shacl.ttl`:
+  - `sh:datatype xsd:string`, `sh:minCount 1`, `sh:maxCount 1`, `sh:pattern "^[A-Za-z0-9][A-Za-z0-9._-]*$"`.
+  - `sh:severity sh:Warning` on the cardinality during v0.7.x — existing fixtures (~36 module baselines in the federation runtime) do not yet carry `processId`. Promoted to `sh:Violation` in v0.8.0 once mappers thread the value through.
+- **`sap:ProcessIdUniqueShape`** — SPARQL invariant ensuring two `Process` nodes never share the same `processId` within a graph. Per-tenant uniqueness is achieved via the runtime's one-database-per-tenant isolation.
+
+### Migration
+- Designers and mappers should start populating `sap:processId` on every new Process. The clean separation is: `processId` = customer's stable identity (single-valued, unique, business-owned); `inScenario` = M:N classification edges to one or more best-practice `Scenario` nodes (e.g. SAP J45).
+- Distinct from `sap:externalId` — `externalId` may reference any external system (Signavio model ID, Cloud-ALM feature ID), while `processId` is the customer's authoritative business code. Both can coexist on the same Process.
+
 ## [0.7.1] — 2026-05-27
 
 ### Changed

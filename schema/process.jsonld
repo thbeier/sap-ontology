@@ -19,6 +19,12 @@
       "rdfs:subClassOf": { "@id": "sap:DomainInstance" },
       "rdfs:label": "Business Document" },
 
+    { "@id": "sap:processId",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:domain": { "@id": "sap:Process" },
+      "rdfs:range":  { "@id": "xsd:string" },
+      "rdfs:label":  "Process ID",
+      "rdfs:comment": "Customer-owned identity code for a Process (e.g. 'RtR-10-20', 'O2C.4.1.3', 'MDG-BP-CR'). The stable identifier the customer's organization uses to refer to this process in policies, KPIs, training material, and audit. Distinct from sap:externalId (which can reference any external system) and from sap:inScenario (which carries SAP best-practice BP codes like J45 as M:N classification, not identity). Required (Warning severity in v0.7.x; promoted to Violation in v0.8.0)." },
     { "@id": "sap:valueStream",   "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
     { "@id": "sap:kpiMetrics",    "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
     { "@id": "sap:isAutomated",   "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:boolean" } },

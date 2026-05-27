@@ -14,6 +14,7 @@
     "description":   { "@id": "sap:description",   "@type": "xsd:string" },
     "externalId":    { "@id": "sap:externalId",    "@type": "xsd:string" },
     "processLevel":  { "@id": "sap:processLevel",  "@type": "xsd:string" },
+    "processId":     { "@id": "sap:processId",     "@type": "xsd:string" },
     "bpmnType":      { "@id": "sap:bpmnType",      "@type": "xsd:string" },
     "transactionCode":          { "@id": "sap:transactionCode" },
     "configurationTransaction": { "@id": "sap:configurationTransaction" },
