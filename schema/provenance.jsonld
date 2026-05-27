@@ -5,7 +5,7 @@
       "@id": "sap:Provenance",
       "@type": "owl:Class",
       "rdfs:label": "Provenance",
-      "rdfs:comment": "Metadata attached to every asserted instance describing where the claim came from, who asserted it, when, and how much to trust it. Bitemporal: validFrom/validTo describe when the fact is true in the world; recordedAt is when the graph learned it. Lineage: supersedes/supersededBy chain prior assertions of the same fact. Lifecycle: changeStatus and related fields describe the AMS lifecycle when a Provenance attaches to a Change."
+      "rdfs:comment": "Metadata attached to every asserted instance describing where the claim came from, who asserted it, when, and how much to trust it. Bitemporal: validFrom/validTo describe when the fact is true in the world; recordedAt is when the graph learned it. Lineage: supersedes/supersededBy chain prior assertions of the same fact. Lifecycle: lifecycleStage records the maturity of the assertion itself (source-agnostic); the SAP-transport pipeline lives on Change.changeStatus."
     },
 
     { "@id": "sap:sourceSystem", "@type": "owl:DatatypeProperty",
@@ -116,10 +116,10 @@
       "rdfs:range":  { "@id": "xsd:string" },
       "rdfs:comment": "Tenant identifier this assertion belongs to in a multi-tenant deployment." },
 
-    { "@id": "sap:changeStatus", "@type": "owl:DatatypeProperty",
+    { "@id": "sap:lifecycleStage", "@type": "owl:DatatypeProperty",
       "rdfs:domain": { "@id": "sap:Provenance" },
       "rdfs:range":  { "@id": "xsd:string" },
-      "rdfs:comment": "AMS change-lifecycle status when this Provenance records a Change transition: planned, in-progress, in-integration-test, in-uat, released-prod, rolled-back, rejected." },
+      "rdfs:comment": "Maturity of the assertion recorded by this Provenance (AMS/ALM-flavored, source-agnostic): planned, in-progress, in-integration-test, in-uat, released-prod, rolled-back, rejected. Distinct from sap:changeStatus on Change, which carries the SAP-transport delivery pipeline." },
     { "@id": "sap:statusEnteredAt", "@type": "owl:DatatypeProperty",
       "rdfs:domain": { "@id": "sap:Provenance" },
       "rdfs:range":  { "@id": "xsd:dateTime" },

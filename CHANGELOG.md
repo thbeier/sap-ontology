@@ -2,6 +2,17 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.7.1] — 2026-05-27
+
+### Changed
+- **Split `sap:changeStatus` into two properties.** v0.5 claimed to unify a single `changeStatus` enum across Change and Provenance, but only `ChangeShape` was migrated — `ProvenanceShape` kept the v0.4 AMS-lifecycle enum, leaving one property with two incompatible vocabularies on two shapes. v0.6's environment-binding work also generalized Provenance to non-Change sources (Cloud-ALM Requirements, Signavio models, ServiceNow Incidents) where the SAP-transport pipeline vocabulary (`released-to-qa`, `imported-to-prd`, `baseline-merged`) is semantically wrong.
+  - `sap:changeStatus` is now declared only on `sap:Change` (transport delivery pipeline: `draft → in-development → unit-tested → released-to-qa → qa-passed → released-to-prd → imported-to-prd → baseline-merged`, plus `rejected`, `rolled-back`). Property declaration moved to `schema/implementation.jsonld`.
+  - `sap:lifecycleStage` (new) replaces `sap:changeStatus` on `sap:Provenance` and carries the source-agnostic assertion-maturity enum: `planned → in-progress → in-integration-test → in-uat → released-prod → rolled-back → rejected`.
+  - `statusEnteredAt`, `statusExitedAt`, `externalChangeId`, `approvalEvidenceUri` remain on `Provenance` and now pair with `lifecycleStage`.
+
+### Migration
+- Any instance setting `sap:changeStatus` on a `Provenance` node must rename the predicate to `sap:lifecycleStage`. No instances in this repository's `examples/` or `tests/` are affected. Runtime fixtures emit `changeStatus` only on `Change` nodes (verified across the runtime mappers and CLI), so this is a documentation-only break for runtime callers.
+
 ## [0.7.0] — 2026-05-20
 
 ### Added

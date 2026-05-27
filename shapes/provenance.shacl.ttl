@@ -103,9 +103,12 @@ sap:ProvenanceShape
     ] ;
     sh:property [ sh:path sap:clientTenant ;     sh:datatype xsd:string ;  sh:maxCount 1 ] ;
 
-    # --- Change-lifecycle context ---------------------------------------
+    # --- Assertion-lifecycle context ------------------------------------
+    # Maturity of the *assertion* this Provenance records (AMS/ALM-flavored,
+    # source-agnostic). Distinct from sap:changeStatus on Change, which is
+    # the SAP-transport delivery pipeline. See CHANGELOG v0.7.1.
     sh:property [
-        sh:path sap:changeStatus ;
+        sh:path sap:lifecycleStage ;
         sh:datatype xsd:string ;
         sh:in (
             "planned" "in-progress" "in-integration-test"

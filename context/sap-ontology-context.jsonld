@@ -48,6 +48,7 @@
     "baselinePhase":           { "@id": "sap:baselinePhase" },
     "clientTenant":            { "@id": "sap:clientTenant",            "@type": "xsd:string" },
     "changeStatus":            { "@id": "sap:changeStatus" },
+    "lifecycleStage":          { "@id": "sap:lifecycleStage" },
     "statusEnteredAt":         { "@id": "sap:statusEnteredAt",         "@type": "xsd:dateTime" },
     "statusExitedAt":          { "@id": "sap:statusExitedAt",          "@type": "xsd:dateTime" },
     "externalChangeId":        { "@id": "sap:externalChangeId",        "@type": "xsd:string" },

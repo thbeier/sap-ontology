@@ -22,7 +22,7 @@ The `sap:Provenance` class carries 30+ optional datatype/object properties, grou
 | Reliability | `trustLevel` (authoritative · verified · asserted · inferred · draft · extracted · reviewed · confirmed · audited), `confidence`, `method`, `extractorModel`, `promptVersion` |
 | Lineage (append-only) | `supersedes`, `supersededBy`, `relationshipToReference` (confirms / overrides / extends), `referenceProvenance`, `overrideReason` |
 | Phase & tenancy | `baselinePhase` (reference / client-transition / client-update), `clientTenant` |
-| Change lifecycle (AMS) | `changeStatus` (planned · in-progress · in-integration-test · in-uat · released-prod · rolled-back · rejected), `statusEnteredAt`, `statusExitedAt`, `externalChangeId`, `approvalEvidenceUri` |
+| Assertion lifecycle (AMS/ALM) | `lifecycleStage` (planned · in-progress · in-integration-test · in-uat · released-prod · rolled-back · rejected), `statusEnteredAt`, `statusExitedAt`, `externalChangeId`, `approvalEvidenceUri` — maturity of the assertion itself, source-agnostic. Distinct from `Change.changeStatus`, which carries the SAP-transport delivery pipeline (draft → in-development → … → baseline-merged) and lives on the Change class, not on Provenance. |
 
 SPARQL invariants (v0.4): `audited` trustLevel requires `approvalEvidenceUri`; `relationshipToReference = overrides` requires `overrideReason`; `method = LLM-extracted` (or `LLM-extraction`) requires `extractorModel`.
 
