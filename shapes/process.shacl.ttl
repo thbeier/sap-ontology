@@ -12,8 +12,7 @@ sap:ProcessShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:pattern "^[A-Za-z0-9][A-Za-z0-9._-]*$" ;
-        sh:severity sh:Warning ;
-        sh:message "processId is the customer-owned identity code (e.g. RtR-10-20). Required from v0.8.0; Warning until then so existing fixtures continue to load." ] ;
+        sh:message "processId is the customer-owned identity code (e.g. RtR-10-20). Required as of v0.8.0." ] ;
     sh:property [ sh:path sap:processLevel ; sh:datatype xsd:string ; sh:minCount 1 ;
         sh:message "processLevel is required. Use L1_ValueChain / L2_ProcessGroup / L3_Process / L4_SubProcess or a documented client-specific label." ;
         sh:or (

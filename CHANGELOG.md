@@ -2,6 +2,14 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.8.0] — 2026-05-28
+
+### Changed (breaking)
+- **`sap:processId` is now a hard SHACL violation when missing** (previously `sh:Warning` in v0.7.2). Every `sap:Process` instance must declare a customer-owned identity code matching `^[A-Za-z0-9][A-Za-z0-9._-]*$`. The federation runtime's 31 module baselines have been migrated against the canonical Process taxonomy that ships in `tests/fixtures/excel/_process_taxonomy/process.csv` (12 L1 value chains + 84 L2 process groups, with hierarchical numbering at L3+). Tenant graphs created against v0.7.x that contain Process nodes without `processId` will now produce SHACL violations on conformance.
+
+### Migration
+- Customer tenants need to backfill `sap:processId` on every Process node before upgrading the upper-model pin past v0.7.2. The recommended convention matches the canonical taxonomy: `<L1-CamelCase>-<NNN>[-<NNN>...]` (e.g. `PtP-040-020`, `RtR-080-110`). The taxonomy fixture in the runtime repository serves as a reference enumeration.
+
 ## [0.7.2] — 2026-05-27
 
 ### Added
