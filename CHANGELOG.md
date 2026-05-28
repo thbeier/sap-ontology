@@ -2,6 +2,18 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.8.3] — 2026-05-28
+
+### Changed (breaking)
+- **`sap:realizesActivity` removed; `sap:realizedBy` now accepts both `sap:Configuration` and `sap:RicefwObject`.** The v0.7.0 RicefwObject→Activity edge was direction-asymmetric with the long-standing Activity→Configuration `realizedBy`: both Configuration and RicefwObject *enable* the Activity, so both should attach on the Activity side with consistent direction and name. After this change:
+  - `ActivityShape.realizedBy` uses `sh:or` to accept either class.
+  - `RicefwObjectShape` no longer declares a `realizesActivity` property (the edge is removed from `schema/implementation.jsonld` and from the JSON-LD context).
+  - Example fixtures inverted: `activity-credit-check` now carries `realizedBy → ricefw-zmm-tol-check` instead of the ricefw row pointing back.
+- **`sap:affects` and `sap:includes` now accept `sap:RicefwObject` in addition to `sap:Configuration`** on `ChangeShape`. A Change can target a Z-program or BAdI just as it can target a SPRO entry — the v0.7.0 RicefwObject class was missing from the Change pipeline. `ChangeShape` also now explicitly constrains `sap:includes` (previously declared in the schema but unconstrained by SHACL).
+
+### Migration
+- Replace `RicefwObject.realizesActivity → Activity` with `Activity.realizedBy → RicefwObject`. Tenants with existing RICEFW data can do this via a Cypher inversion. The runtime's mm_baseline fixture follows the new convention.
+
 ## [0.8.2] — 2026-05-28
 
 ### Changed

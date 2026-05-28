@@ -95,7 +95,6 @@
 
     "ricefwType":        { "@id": "sap:ricefwType",        "@type": "xsd:string" },
     "objectId":          { "@id": "sap:objectId",          "@type": "xsd:string" },
-    "enhances":          { "@id": "sap:enhances",          "@type": "@id" },
-    "realizesActivity":  { "@id": "sap:realizesActivity",  "@type": "@id" }
+    "enhances":          { "@id": "sap:enhances",          "@type": "@id" }
   }
 }

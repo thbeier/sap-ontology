@@ -44,7 +44,12 @@ sap:ActivityShape
         sh:message "transactionCode is the canonical SAP T-code executing this Activity (e.g. VA01). Variant T-codes belong in description, not as additional transactionCode values." ;
         sh:pattern "^[A-Z][A-Z0-9_./-]+$" ] ;
     sh:property [ sh:path sap:supportedBy ; sh:class sap:ApplicationComponent ] ;
-    sh:property [ sh:path sap:realizedBy ;  sh:class sap:Configuration ] ;
+    sh:property [ sh:path sap:realizedBy ;
+        sh:or (
+            [ sh:class sap:Configuration ]
+            [ sh:class sap:RicefwObject ]
+        ) ;
+        sh:message "Activity.realizedBy targets the implementation artifact enabling this Activity — sap:Configuration (SPRO customizing) or sap:RicefwObject (customer code / form / interface). Both can coexist; an Activity may be realized by multiple Configurations and RicefwObjects." ] ;
     sh:property [ sh:path sap:followedBy ;
         sh:or (
             [ sh:class sap:Activity ]

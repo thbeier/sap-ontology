@@ -10,7 +10,6 @@
   "sap:tier": "application",
   "sap:lifecycleState": "live",
   "sap:enhances": { "@id": "sap:app-sd-module" },
-  "sap:realizesActivity": { "@id": "sap:activity-credit-check" },
   "sap:inScenario": { "@id": "sap:scenario-as-is" },
   "sap:hasProvenance": { "@id": "sap:prov-signavio-etl-001" }
 }

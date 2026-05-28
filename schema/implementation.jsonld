@@ -53,7 +53,7 @@
 
     { "@id": "sap:includes",    "@type": "owl:ObjectProperty",
       "rdfs:domain": { "@id": "sap:Change" },
-      "rdfs:range":  { "@id": "sap:Configuration" } },
+      "rdfs:comment": "Change→enabler: same blast-radius semantics as sap:affects but used for bundling rather than impact. Polymorphic range — sap:Configuration or sap:RicefwObject. Changes can bundle a SPRO entry alongside a Z-program in the same transport. (rdfs:range deliberately omitted; see sap:realizedBy for rationale.)" },
     { "@id": "sap:carriedBy",   "@type": "owl:ObjectProperty",
       "rdfs:domain": { "@id": "sap:Change" },
       "rdfs:range":  { "@id": "sap:Transport" } },
@@ -103,11 +103,7 @@
       "rdfs:domain": { "@id": "sap:RicefwObject" },
       "rdfs:range":  { "@id": "sap:ApplicationComponent" },
       "rdfs:label":  "Enhances",
-      "rdfs:comment": "RicefwObject→ApplicationComponent: the standard SAP component or object being extended (BAdI host, enhancement spot, user exit, standard report being copied-and-modified). Required for Reports/Interfaces/Conversions that replace standard behaviour; optional for greenfield Forms/Workflows." },
-    { "@id": "sap:realizesActivity", "@type": "owl:ObjectProperty",
-      "rdfs:domain": { "@id": "sap:RicefwObject" },
-      "rdfs:range":  { "@id": "sap:Activity" },
-      "rdfs:label":  "Realizes Activity",
-      "rdfs:comment": "RicefwObject→Activity: the business action this customer object supports. Multi-valued — a single Z-report may serve multiple Activities. This is the edge that supports `graph.ricefw_for_activity` blast-radius queries during incident triage." }
+      "rdfs:comment": "RicefwObject→ApplicationComponent: the standard SAP component or object being extended (BAdI host, enhancement spot, user exit, standard report being copied-and-modified). Required for Reports/Interfaces/Conversions that replace standard behaviour; optional for greenfield Forms/Workflows." }
   ]
 }
+
