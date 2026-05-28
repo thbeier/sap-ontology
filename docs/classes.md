@@ -58,7 +58,7 @@ SPARQL invariants (v0.4): `audited` trustLevel requires `approvalEvidenceUri`; `
 |---|---|
 | `sap:OrgUnit` | Legal or hierarchical entity |
 | `sap:Role` | Durable function performed by humans or system agents |
-| `sap:Capability` | What the business does (TOGAF / BIZBOK) |
+| `sap:Capability` | Durable business capability — what the org *can do* (TOGAF / BIZBOK). Strategic-layer concept, distinct from `sap:Requirement` (transactional ask). Linked from `sap:Process` via `realizesCapability` (optional; populate only when the tenant runs capability heat-maps, portfolio analytics, or EAM-style views — operational incident / change queries do not traverse this edge). |
 | `sap:User` | GDPR-gated — not populated by default |
 
 ## Scenario / Versioning

@@ -26,7 +26,11 @@ sap:ProcessShape
             [ sh:class sap:Process ]
             [ sh:class sap:Activity ]
         ) ] ;
-    sh:property [ sh:path sap:realizesCapability ; sh:class sap:Capability ] .
+    sh:property [
+        sh:path sap:realizesCapability ;
+        sh:class sap:Capability ;
+        sh:severity sh:Info ;
+        sh:message "realizesCapability is a strategic-layer cross-link (Process -> business Capability). Optional at the operational layer — incident triage and change-impact queries do not traverse it. Required only if the tenant consumes capability heat-maps / portfolio reporting / LeanIX-style EAM views." ] .
 
 sap:ActivityShape
     a sh:NodeShape ;

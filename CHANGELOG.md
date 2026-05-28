@@ -2,6 +2,11 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.8.1] — 2026-05-28
+
+### Changed
+- **`sap:realizesCapability` documented as a strategic-layer cross-link, not an operational requirement.** Always was optional (no `minCount`); now annotated with `sh:severity sh:Info` and an explanatory `sh:message`, and the `rdfs:comment` on the property + the `Capability` row in `docs/classes.md` spell out the load-bearing distinction: `Capability` is the durable business competence (TOGAF / LeanIX BCM); `Requirement` is the transactional path to change it. Operational consumers (incident triage, change impact) never traverse `realizesCapability` — it powers portfolio heat-maps, capability dashboards, and EAM-style strategic queries. Tenants without those use cases can leave `realizesCapability` empty without consequence.
+
 ## [0.8.0] — 2026-05-28
 
 ### Changed (breaking)
