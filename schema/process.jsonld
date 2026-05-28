@@ -42,7 +42,8 @@
     { "@id": "sap:legalStatus",   "@type": "owl:DatatypeProperty", "rdfs:range": { "@id": "xsd:string" } },
 
     { "@id": "sap:contains",    "@type": "owl:ObjectProperty" },
-    { "@id": "sap:followedBy",  "@type": "owl:ObjectProperty" },
+    { "@id": "sap:followedBy",  "@type": "owl:ObjectProperty",
+      "rdfs:comment": "BPMN sequence flow. Connects any pair of flow nodes — Activity, Event, or Decision — in execution order. Common patterns: Activity -> Activity (sequential steps), Event -> Activity (event triggers a step), Activity -> Event (step emits an event), Activity -> Decision (step ends at a gateway). Decision uses sap:routesTo for its outgoing branches but can be the target of followedBy. Self-loops on the same class (e.g. Activity -> Activity) are the common case and explicitly valid." },
     { "@id": "sap:produces",    "@type": "owl:ObjectProperty",
       "rdfs:domain": { "@id": "sap:Activity" },
       "rdfs:range":  { "@id": "sap:BusinessDocument" } },

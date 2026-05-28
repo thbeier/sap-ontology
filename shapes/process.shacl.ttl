@@ -44,7 +44,14 @@ sap:ActivityShape
         sh:message "transactionCode is the canonical SAP T-code executing this Activity (e.g. VA01). Variant T-codes belong in description, not as additional transactionCode values." ;
         sh:pattern "^[A-Z][A-Z0-9_./-]+$" ] ;
     sh:property [ sh:path sap:supportedBy ; sh:class sap:ApplicationComponent ] ;
-    sh:property [ sh:path sap:realizedBy ;  sh:class sap:Configuration ] .
+    sh:property [ sh:path sap:realizedBy ;  sh:class sap:Configuration ] ;
+    sh:property [ sh:path sap:followedBy ;
+        sh:or (
+            [ sh:class sap:Activity ]
+            [ sh:class sap:Event ]
+            [ sh:class sap:Decision ]
+        ) ;
+        sh:message "Activity.followedBy must target another flow node (Activity / Event / Decision). Self-class loops (Activity -> Activity) are the common sequential-step pattern." ] .
 
 sap:EventShape
     a sh:NodeShape ;
@@ -52,7 +59,14 @@ sap:EventShape
     sh:node sap:DomainInstanceShape ;
     sh:property [ sh:path sap:name ;      sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path sap:eventType ; sh:datatype xsd:string ;
-        sh:in ( "start" "intermediate" "end" "message" "timer" "signal" ) ] .
+        sh:in ( "start" "intermediate" "end" "message" "timer" "signal" ) ] ;
+    sh:property [ sh:path sap:followedBy ;
+        sh:or (
+            [ sh:class sap:Activity ]
+            [ sh:class sap:Event ]
+            [ sh:class sap:Decision ]
+        ) ;
+        sh:message "Event.followedBy must target another flow node (Activity / Event / Decision). Typical: a start / intermediate Event followed by the Activity it triggers." ] .
 
 sap:DecisionShape
     a sh:NodeShape ;

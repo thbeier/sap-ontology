@@ -2,6 +2,14 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.8.2] — 2026-05-28
+
+### Changed
+- **`sap:followedBy` is now properly constrained as BPMN sequence flow.** Previously had no `rdfs:domain` / `rdfs:range` and no SHACL constraint on `ActivityShape` / `EventShape` — so `Event` had zero outgoing or incoming edges in the model even though every BPMN scenario needs them. Now:
+  - `rdfs:comment` on the property documents the four valid patterns: Activity→Activity (sequential steps — the common case), Event→Activity (event triggers a step), Activity→Event (step emits an event), Activity→Decision (step ends at a gateway). Decision keeps `sap:routesTo` for its outgoing branches.
+  - `ActivityShape.followedBy` and new `EventShape.followedBy` both target `sap:or ( Activity Event Decision )` — flow nodes only.
+  - The Activity → Activity self-loop pattern is now explicit and validated rather than allowed-by-omission.
+
 ## [0.8.1] — 2026-05-28
 
 ### Changed
