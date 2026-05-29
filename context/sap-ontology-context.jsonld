@@ -76,7 +76,7 @@
     "consumesDoc":   { "@id": "sap:consumesDoc",   "@type": "@id" },
     "routesTo":      { "@id": "sap:routesTo",      "@type": "@id" },
     "hostedOn":      { "@id": "sap:hostedOn",      "@type": "@id" },
-    "mastersDataFor":{ "@id": "sap:mastersDataFor","@type": "@id" },
+    "masteredBy":    { "@id": "sap:masteredBy",    "@type": "@id" },
     "carries":       { "@id": "sap:carries",       "@type": "@id" },
     "dependsOn":     { "@id": "sap:dependsOn",     "@type": "@id" },
     "partOf":        { "@id": "sap:partOf",        "@type": "@id" },

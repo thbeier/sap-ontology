@@ -358,7 +358,7 @@ def slide_artifact_bridge(prs):
     rel_labels = [
         ("produces  →",       0, ACCENT),
         ("represents  →",     1, ACCENT),
-        ("←  mastersDataFor", 2, ACCENT),
+        ("masteredBy  →", 2, ACCENT),
     ]
     for text, idx, color in rel_labels:
         gap_x = box_xs[idx] + box_w
@@ -398,7 +398,7 @@ def slide_artifact_bridge(prs):
 
     for step in [
         "1.  match  ApplicationComponent  where  name = 'SAP S/4 SD'",
-        "2.  ← mastersDataFor ─  DataObject  (Customer, SalesOrder, …)",
+        "2.  ─ masteredBy → ─  DataObject  (Customer, SalesOrder, …)  [direction inverted in v0.8.4]",
         "3.  ← represents ─      BusinessDocument  (Sales Order, Invoice, …)",
         "4.  ← produces ─        Activity  (Create Sales Order, Process Invoice, …)",
     ]:

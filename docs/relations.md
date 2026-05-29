@@ -6,7 +6,7 @@
 | Relation | From → To |
 |---|---|
 | `sap:hostedOn` | ApplicationComponent → TechnologyBuildingBlock |
-| `sap:mastersDataFor` | ApplicationComponent → DataObject |
+| `sap:masteredBy` | DataObject → ApplicationComponent (system of record that masters the data) |
 | `sap:carries` | Integration → DataObject |
 | `sap:dependsOn` | ApplicationComponent → ApplicationComponent |
 

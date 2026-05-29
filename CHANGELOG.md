@@ -2,6 +2,15 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.8.4] — 2026-05-29
+
+### Changed (breaking)
+- **Renamed `sap:mastersDataFor` → `sap:masteredBy` and inverted the edge direction.** Was `ApplicationComponent → DataObject` ("FI-GL masters data for ACDOCA"); now `DataObject → ApplicationComponent` ("ACDOCA masteredBy FI-GL"). Aligns this edge with the passive-voice enabler-family convention re-established in v0.8.3 (`Activity --realizedBy--> Configuration | RicefwObject`). All references (schema, context, docs, runtime mapper, ~25 fixture CSVs, integration tests, ontology-overview diagram) updated together.
+
+### Migration
+- Tenants holding `(:ApplicationComponent)-[:mastersDataFor]->(:DataObject)` should invert and rename via Cypher: `MATCH (a:ApplicationComponent)-[r:mastersDataFor]->(d:DataObject) MERGE (d)-[:masteredBy]->(a) DELETE r`.
+- CSV ingest: the `masters_data_for` column moves from `application_component.csv` (values were target DataObject IDs) to `data_object.csv` as `mastered_by` (values are target ApplicationComponent IDs). Pivot accordingly.
+
 ## [0.8.3] — 2026-05-28
 
 ### Changed (breaking)
