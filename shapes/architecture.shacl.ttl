@@ -43,4 +43,6 @@ sap:DataObjectShape
     sh:node sap:DomainInstanceShape ;
     sh:property [ sh:path sap:name ;           sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path sap:classification ; sh:datatype xsd:string ;
-        sh:in ( "master" "transactional" "reference" ) ; sh:minCount 1 ] .
+        sh:in ( "master" "transactional" "reference" ) ; sh:minCount 1 ] ;
+    sh:property [ sh:path sap:usesData ; sh:class sap:DataObject ;
+        sh:message "DataObject.usesData must target another DataObject (e.g. VBAP usesData MARA)." ] .

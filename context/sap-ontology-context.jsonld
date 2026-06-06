@@ -77,6 +77,7 @@
     "routesTo":      { "@id": "sap:routesTo",      "@type": "@id" },
     "hostedOn":      { "@id": "sap:hostedOn",      "@type": "@id" },
     "masteredBy":    { "@id": "sap:masteredBy",    "@type": "@id" },
+    "usesData":      { "@id": "sap:usesData",      "@type": "@id" },
     "carries":       { "@id": "sap:carries",       "@type": "@id" },
     "dependsOn":     { "@id": "sap:dependsOn",     "@type": "@id" },
     "partOf":        { "@id": "sap:partOf",        "@type": "@id" },
