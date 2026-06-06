@@ -2,6 +2,14 @@
 
 All notable changes to this ontology are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semver](https://semver.org/).
 
+## [0.8.5] — 2026-06-06
+
+### Added
+- **`sap:usesData` (DataObject → DataObject).** Models a data-level reference between data objects: a transactional object references another (typically master) object it depends on — e.g. `VBAP` (sales-order item) `usesData` `MARA` (material master); no material, no line item. Modelled at the item table where the foreign key lives, which keeps it distinct from `sap:represents` (BusinessDocument → DataObject, the document's own backing structure). Declared in `schema/architecture.jsonld`, aliased in the JSON-LD context, and range-constrained by a property shape on `DataObjectShape`.
+
+### Compatibility
+- Additive and non-breaking; existing v0.8.4 instances validate unchanged. No migration required.
+
 ## [0.8.4] — 2026-05-29
 
 ### Changed (breaking)
