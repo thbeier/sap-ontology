@@ -40,9 +40,9 @@
 | Relation | From → To | Meaning |
 |---|---|---|
 | `sap:supportedBy` | Activity → ApplicationComponent | Step runs on this app |
-| `sap:realizedBy` | Activity → Configuration | Business rule implemented by these configs |
+| `sap:realizedBy` | Activity → Configuration \| RicefwObject | Implementation artifact enabling the step — SPRO customizing or customer code/form/interface (SHACL `sh:or` union; both may coexist) |
 | `sap:represents` | BusinessDocument → DataObject | Document ↔ data entity |
-| `sap:affects` | Change → Configuration | A change modifies these configs |
+| `sap:affects` | Change → Configuration \| RicefwObject | A change modifies these configs or customer objects (SHACL `sh:or` union) |
 | `sap:impacts` | Change → Activity | Derived from `affects` + `realizedBy` (not authored) |
 | `sap:linkedTo` | Incident → Activity \| ApplicationComponent \| Configuration | AMS entry point |
 | `sap:executes` | Role → Activity | RACI Responsible — the business-org link |
