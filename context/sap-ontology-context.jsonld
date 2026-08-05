@@ -13,6 +13,8 @@
     "name":          { "@id": "sap:name",          "@type": "xsd:string" },
     "description":   { "@id": "sap:description",   "@type": "xsd:string" },
     "externalId":    { "@id": "sap:externalId",    "@type": "xsd:string" },
+    "alias":         { "@id": "sap:alias",         "@type": "xsd:string", "@container": "@set" },
+    "altLabel":      { "@id": "sap:altLabel",      "@type": "xsd:string", "@container": "@set" },
     "processLevel":  { "@id": "sap:processLevel",  "@type": "xsd:string" },
     "processId":     { "@id": "sap:processId",     "@type": "xsd:string" },
     "bpmnType":      { "@id": "sap:bpmnType",      "@type": "xsd:string" },
